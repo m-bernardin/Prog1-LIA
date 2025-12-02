@@ -1,3 +1,3 @@
-public class ComplexRecipe{
+public class ComplexRecipe extends Recipe{
     
 }
