@@ -1,4 +1,6 @@
+
 public class RecipeBook {
+<<<<<<< HEAD
 
     public void addRecipe(Recipe recipe) {
         // TODO Auto-generated method stub
@@ -20,4 +22,8 @@ public class RecipeBook {
         throw new UnsupportedOperationException("Unimplemented method 'getTopRated'");
     }
     
+=======
+        
+>>>>>>> 1947ab347e4e4c1e52a840afdf5b3b1147e3a38d
 }
+
