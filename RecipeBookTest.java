@@ -1,9 +1,12 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.io.TempDir;
 
+@author m-bernardin
 public class RecipeBookTest
 {
+    private RecipeBook book;
+    private Recipe recipe;
+
     public RecipeBookTest()
     {
     }
@@ -11,6 +14,8 @@ public class RecipeBookTest
     @BeforeEach
     public void setUp()
     {
+        book=new RecipeBook();
+        recipe=new SimpleRecipe();
     }
 
     @AfterEach
@@ -21,25 +26,36 @@ public class RecipeBookTest
     @Test
     public void testUpvoteRecipe()
     {
-
+        book.addRecipe(recipe);
+        book.upvoteRecipe(recipe);
+        assertEquals(1,recipe.getRating());
     }
 
     @Test
     public void testDownvoteRecipe()
     {
-
+        book.addRecipe(recipe);
+        book.downvoteRecipe(recipe);
+        assertEquals(1,recipe.getRating());
     }
 
     @Test
-    public void testShowTopRated()
+    public void testGetTopRated()
     {
-
+        Recipe recipe2=new SimpleRecipe();
+        book.addRecipe(recipe);
+        book.addRecipe(recipe2);
+        book.upvoteRecipe(recipe);
+        assertEquals(recipe2,book.getTopRated());
     }
 
     @Test
-    public void testShowAll()
+    public void testGetAll()
     {
-
+        Recipe recipe2=new SimpleRecipe();
+        book.addRecipe(recipe2);
+        book.addRecipe(recipe);
+        assertEquals(ArrayList<>, book.getAll());
     }
 
     @Test
@@ -51,19 +67,23 @@ public class RecipeBookTest
     @Test
     public void testSearchTitle()
     {
-
+        recipe.setDishName("pasta");
+        book.addRecipe(recipe);
+        assertEquals(recipe, book.searchTitle("pasta"));
     }
 
     @Test
     public void testSearchIngredients()
     {
-
     }
 
     @Test
     public void testSearchTime()
     {
-
+        Step step = new Step();
+        step.setTime(12);
+        recipe.addStep(step);
+        assertEquals(step, step);
     }
 
     @Test
