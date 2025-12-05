@@ -1,29 +1,46 @@
+import java.util.ArrayList;
 
 public class RecipeBook {
-<<<<<<< HEAD
 
+    String title;
+    ArrayList<Recipe> recipes;
+
+    public RecipeBook(String title) {
+        this.title = title;
+        
+    }
     public void addRecipe(Recipe recipe) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addRecipe'");
+
     }
 
     public void upvoteRecipe(Recipe recipe) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'upvoteRecipe'");
+
     }
 
     public void downvoteRecipe(Recipe recipe) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'downvoteRecipe'");
+
+    }
+    public ArrayList<Recipe> searchName(String name){
+        return null;
     }
 
-    public Object getTopRated() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTopRated'");
+    public ArrayList<Recipe> searchIngredient(String ingredient){
+        return null;
+    }
+
+    public ArrayList<Recipe> searchTime(String time){
+        return null;
+    }
+    public ArrayList<Recipe> searchTag(String tag){
+        return null;
+    }
+
+    public Recipe getTopRated() {
+        return null;
     }
     
-=======
-        
->>>>>>> 1947ab347e4e4c1e52a840afdf5b3b1147e3a38d
+    public ArrayList<Recipe> getAll() {
+        return null;
+    }
 }
 

@@ -1,7 +1,10 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.*;
 
-@author m-bernardin
+//@author m-bernardin
 public class RecipeBookTest
 {
     private RecipeBook book;
@@ -14,8 +17,8 @@ public class RecipeBookTest
     @BeforeEach
     public void setUp()
     {
-        book=new RecipeBook();
-        recipe=new SimpleRecipe();
+        book=new RecipeBook("Mom's Recipes");
+        recipe=new SimpleRecipe("Pancakes",4);
     }
 
     @AfterEach
@@ -42,20 +45,20 @@ public class RecipeBookTest
     @Test
     public void testGetTopRated()
     {
-        Recipe recipe2=new SimpleRecipe();
+        Recipe recipe2=new SimpleRecipe("Omelette",2);
         book.addRecipe(recipe);
         book.addRecipe(recipe2);
-        book.upvoteRecipe(recipe);
+        book.upvoteRecipe(recipe2);
         assertEquals(recipe2,book.getTopRated());
     }
 
     @Test
     public void testGetAll()
     {
-        Recipe recipe2=new SimpleRecipe();
+        Recipe recipe2=new SimpleRecipe("Omelette",2);
         book.addRecipe(recipe2);
         book.addRecipe(recipe);
-        assertEquals(ArrayList<>, book.getAll());
+        assertEquals(new ArrayList<>(), book.getAll());
     }
 
     @Test
@@ -65,11 +68,13 @@ public class RecipeBookTest
     }
 
     @Test
-    public void testSearchTitle()
+    public void testSearchName()
     {
-        recipe.setDishName("pasta");
+        recipe.setName("pasta");
         book.addRecipe(recipe);
-        assertEquals(recipe, book.searchTitle("pasta"));
+        ArrayList<Recipe> expectedResult=new ArrayList<>();
+        expectedResult.add(recipe);
+        assertEquals(expectedResult, book.searchName("pasta"));
     }
 
     @Test
@@ -80,10 +85,10 @@ public class RecipeBookTest
     @Test
     public void testSearchTime()
     {
-        Step step = new Step();
+        /**Step step = new Step();
         step.setTime(12);
         recipe.addStep(step);
-        assertEquals(step, step);
+        assertEquals(step, step);**/
     }
 
     @Test

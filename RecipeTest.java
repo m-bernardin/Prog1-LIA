@@ -8,7 +8,7 @@ public class RecipeTest {
     }
     @BeforeEach
     public void setUp() {
-        Recipe recipe = new Recipe("Grilled Cheese");
+        recipe = new Recipe("Grilled Cheese",1);
     }
     @AfterEach
     public void tearDown() {   
