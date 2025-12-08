@@ -28,7 +28,7 @@ public class RecipeBook {
         return null;
     }
 
-    public ArrayList<Recipe> searchTime(String time){
+    public ArrayList<Recipe> searchTime(int time){
         return null;
     }
     public ArrayList<Recipe> searchTag(String tag){
@@ -41,6 +41,10 @@ public class RecipeBook {
     
     public ArrayList<Recipe> getAll() {
         return null;
+    }
+    public ArrayList<Recipe> getRecipes() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRecipes'");
     }
 }
 
