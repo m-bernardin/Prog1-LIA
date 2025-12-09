@@ -1,10 +1,15 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.beans.Transient;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.*;
 
 public class ComplexRecipeTest{
+    private ComplexRecipe recipe;
+    private SimpleRecipe subrecipe1;
+    private SimpleRecipe subrecipe2;
+    private SimpleRecipe subrecipe3;
+    
     public ComplexRecipeTest()
     {
 
@@ -13,7 +18,16 @@ public class ComplexRecipeTest{
     @BeforeEach
     public void startup()
     {
+        recipe=new ComplexRecipe("Pasta", 4);
+    }
 
+    public void setupSubrecipes() {
+        subrecipe1=new SimpleRecipe("Dough", 4);
+        subrecipe2=new SimpleRecipe("Sauce", 4);
+        subrecipe2=new SimpleRecipe("All Together", 4);
+        recipe.addRecipe(subrecipe1);
+        recipe.addRecipe(subrecipe2);
+        recipe.addRecipe(subrecipe3);
     }
 
     @AfterEach
@@ -25,18 +39,24 @@ public class ComplexRecipeTest{
     @Test
     public void calculateTimeTest()
     {
-
+        setupSubrecipes();
+        recipe.calculateTime();
+        assertEquals(80, recipe.getTime());
     }
 
     @Test
     public void addRecipeTest()
     {
-
+        SimpleRecipe subrecipe=new SimpleRecipe("Sauce", 2);
+        recipe.addRecipe(subrecipe);
+        ArrayList<SimpleRecipe> subrecipes=recipe.getRecipes();
+        assertEquals(subrecipe, subrecipes.get(0));
     }
 
     @Test
     public void scaleTest()
     {
-        
+        setupSubrecipes();
+        assertEquals("placeholder stringt", recipe.scale(2.5));
     }
 }
