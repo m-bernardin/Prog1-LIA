@@ -10,7 +10,7 @@ public class Recipe {
     protected int servings;
     protected Integer rating;
     protected String introduction;
-    protected HashSet<Ingredient> ingredients;
+    protected ArrayList<Ingredient> ingredients;
     protected HashSet<String> equipment;
     protected int time;
     protected HashSet<Tags> tags;
@@ -52,7 +52,7 @@ public class Recipe {
         return tags;
     }
 
-    public HashSet<Ingredient> getIngredients(){
+    public ArrayList<Ingredient> getIngredients(){
         return ingredients;
     }
 
