@@ -25,8 +25,12 @@ public class ComplexRecipe extends Recipe{
         return ingredients;
     }
 
-    public SimpleRecipe scale(int factor) {
-        return null;
+    public ComplexRecipe scale(int factor) {
+        ComplexRecipe scaledRecipe=new ComplexRecipe(name, servings*factor);
+        for(SimpleRecipe recipe:subRecipes){
+            scaledRecipe.addSubRecipe(recipe.scale(factor));
+        }
+        return scaledRecipe;
     }
     
     public ArrayList<SimpleRecipe> getRecipes() {
