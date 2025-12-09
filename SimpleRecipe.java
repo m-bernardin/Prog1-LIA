@@ -17,15 +17,14 @@ public class SimpleRecipe extends Recipe {
         return true;
     }
 
-    public int calculateTime() {
-        int time=0;
+    public void calculateTime() {
+        time=0;
         for(int i=0;i<steps.size();++i){
             time+=steps.get(i).getTime();
         }
-        return time;
     }
 
-    public HashSet<Ingredient> calculateIngredients() {
+    public void calculateIngredients() {
         HashSet<Ingredient> recipeIngredients=new HashSet<>();
         for(int i=0;i<steps.size();++i){
             HashSet<Ingredient> stepIngredients=steps.get(i).getIngredients();
@@ -33,7 +32,13 @@ public class SimpleRecipe extends Recipe {
                 recipeIngredients.add(ingredient);
             }
         }
-        return recipeIngredients;
+        ingredients=recipeIngredients;
+    }
+
+    public void calculateEquipment() {
+        for(int i=0;i<steps.size();++i){
+            equipment.add(steps.get(i).getEquipment());
+        }
     }
 
     public SimpleRecipe scale(int factor) {
@@ -46,9 +51,8 @@ public class SimpleRecipe extends Recipe {
 
     public String getIngredientsAsString()
     {
-        HashSet<Ingredient> recipeIngredients=calculateIngredients();
         String ingredientsString="";
-        for(Ingredient ingredient:recipeIngredients){
+        for(Ingredient ingredient:ingredients){
             ingredientsString+=ingredient.getQuantity()+ingredient.getUnit()+" of "+ingredient.getName()+"\n";
         }
         return ingredientsString;
@@ -74,5 +78,11 @@ public class SimpleRecipe extends Recipe {
         recipeString+="Steps: \n"+getStepsAsString()+"\n";
         recipeString+="============";
         return recipeString;
+    }
+
+    public void completeRecipe(){
+        calculateIngredients();
+        calculateTime();
+        recipeCompleteFlag=true;
     }
 }

@@ -10,10 +10,11 @@ public class Recipe {
     protected int servings;
     protected Integer rating;
     protected String introduction;
-    HashSet<Ingredient> ingredients;
-    HashSet<String> equipment;
-    int time;
-    HashSet<Tags> tags;
+    protected HashSet<Ingredient> ingredients;
+    protected HashSet<String> equipment;
+    protected int time;
+    protected HashSet<Tags> tags;
+    protected boolean recipeCompleteFlag=false;
     
     public Recipe(String name, int servings) {
         this.name = name;
@@ -35,6 +36,7 @@ public class Recipe {
     public void setRating(int rating){
         this.rating=rating;
     }
+
     public boolean addStep(){
         return false;
     }
@@ -54,6 +56,10 @@ public class Recipe {
         return ingredients;
     }
 
+    public HashSet<String> getEquipment(){
+        return equipment;
+    }
+
     public int getTime(){
         return time;
     }
@@ -65,6 +71,10 @@ public class Recipe {
     public String getIntroduction()
     {
         return introduction;
+    }
+
+    public void setIntroduction(String introduction){
+        this.introduction=introduction;
     }
 
     public int getServings()
