@@ -9,4 +9,7 @@ public class Ingredient {
         this.quantity = quantity;
         this.unit = unit;
     }
+    public String getName(){
+        return name;
+    }
 }

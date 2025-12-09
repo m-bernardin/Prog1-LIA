@@ -12,8 +12,8 @@ public class SimpleRecipe extends Recipe {
         super(name, servings);
     }
     
-    public void addStep(Step step) {
-        
+    public boolean addStep(Step step) {
+        return true;
     }
 
     public int calculateTime() {
