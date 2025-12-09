@@ -1,6 +1,5 @@
 public class Main{
     public static void main(String[] args){
-        System.out.println("hiii");
-        
+        RecipeBook book=new RecipeBook("Big Recipe Book, 5th ed.");
     }
 }
