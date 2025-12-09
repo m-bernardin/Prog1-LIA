@@ -1,35 +1,34 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ComplexRecipe extends Recipe{
+    ArrayList<SimpleRecipe> subRecipes;
     
-    ArrayList<SimpleRecipe> Subrecipes = new ArrayList<>();
-    
-    public ComplexRecipe(String name, int servings) {
+    public ComplexRecipe(String name, int servings){
         super(name, servings);
     }
-
-    public void addRecipe(SimpleRecipe subrecipe1) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addRecipe'");
+    public boolean addSubRecipe(SimpleRecipe recipe) {
+        subRecipes.add(recipe);
+        return true;
     }
 
-    public int getTime() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTime'");
+    public int calculateTime() {
+        int totalTime=0;
+        for(SimpleRecipe recipe:subRecipes){
+            totalTime+=recipe.getTime();
+        }
+        return totalTime;
     }
 
-    public void calculateTime() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'calculateTime'");
+    public HashSet<Ingredient> calculateIngrediants() {
+        return null;
     }
 
+    public SimpleRecipe scale(int factor) {
+        return null;
+    }
+    
     public ArrayList<SimpleRecipe> getRecipes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRecipes'");
-    }
-
-    public String scale(double factor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'scale'");
+        return subRecipes;
     }
 }

@@ -59,6 +59,10 @@ public class SimpleRecipeTest {
         assertEquals(3,simpleRecipe.getSteps().size());
     }
     @Test
+    public void testAddRecipe(){
+        assertFalse(simpleRecipe.addRecipe());
+    }
+    @Test
     public void testIngrediantQtyBoundry(){
         HashSet<Ingredient> ingredients = new HashSet<>();
         ingredients.add(new Ingredient("Butter",-1,Units.TABLESPOON));
