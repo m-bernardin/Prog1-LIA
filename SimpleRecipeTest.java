@@ -35,7 +35,7 @@ public class SimpleRecipeTest {
         expectedIngredients.add(new Ingredient("Sliced Bread",2,Units.INDIVIDUAL));
         expectedIngredients.add(new Ingredient("Butter",1,Units.TABLESPOON));
         expectedIngredients.add(new Ingredient("Cheese slice",2,Units.INDIVIDUAL));
-        assertEquals(expectedIngredients, simpleRecipe.calculateIngrediants());
+        assertEquals(expectedIngredients, simpleRecipe.calculateIngredients());
     
     }
     

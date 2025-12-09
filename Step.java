@@ -7,11 +7,13 @@ public class Step {
     private HashSet<Ingredient> ingredients;
     private String description;
     private int time; 
+    private String equipment;
 
-    public Step(HashSet<Ingredient> ingredients, String description, int time) {
+    public Step(HashSet<Ingredient> ingredients, String description, int time,String equipment) {
         this.ingredients = ingredients;
         this.description = description;
         this.time = time;
+        this.equipment=equipment;
     }
 
     public HashSet<Ingredient> getIngredients() {
@@ -36,5 +38,13 @@ public class Step {
 
     public void addIngredient(Ingredient ingredient){
         ingredients.add(ingredient);
+    }
+
+    public String getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(String equipment) {
+        this.equipment = equipment;
     }
 }
