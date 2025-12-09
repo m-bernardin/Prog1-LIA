@@ -20,8 +20,9 @@ public class ComplexRecipe extends Recipe{
         return totalTime;
     }
 
-    public HashSet<Ingredient> calculateIngrediants() {
-        return null;
+    public ArrayList<Ingredient> calculateIngredients() {
+        ArrayList<Ingredient> ingredients=subRecipes.get(0).getIngredients();
+        return ingredients;
     }
 
     public SimpleRecipe scale(int factor) {

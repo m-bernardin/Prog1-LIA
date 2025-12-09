@@ -5,7 +5,7 @@ public class Recipe {
 
     String name;
     int servings;
-    HashSet<Ingredient> ingredients;
+    ArrayList<Ingredient> ingredients;
     HashSet<String> equipment;
     int rating;
     int time;
@@ -45,7 +45,7 @@ public class Recipe {
         return tags;
     }
 
-    public HashSet<Ingredient> getIngredients(){
+    public ArrayList<Ingredient> getIngredients(){
         return ingredients;
     }
 
