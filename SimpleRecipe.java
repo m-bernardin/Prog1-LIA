@@ -1,24 +1,39 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 
+/**
+ * @author Mathieu Bernardin
+ */
 public class SimpleRecipe extends Recipe {
 
-    ArrayList<Step> steps = new ArrayList<>();
+    private ArrayList<Step> steps = new ArrayList<>();
     
     public SimpleRecipe(String name, int servings) {
         super(name, servings);
     }
     
     public boolean addStep(Step step) {
+        steps.add(step);
         return true;
     }
 
     public int calculateTime() {
-        return 0;
+        int time=0;
+        for(int i=0;i<steps.size();++i){
+            time+=steps.get(i).getTime();
+        }
+        return time;
     }
 
-    public HashSet<Ingredient> calculateIngrediants() {
-        return null;
+    public HashSet<Ingredient> calculateIngredients() {
+        HashSet<Ingredient> recipeIngredients=new HashSet<>();
+        for(int i=0;i<steps.size();++i){
+            HashSet<Ingredient> stepIngredients=steps.get(i).getIngredients();
+            for(Ingredient ingredient:stepIngredients){
+                recipeIngredients.add(ingredient);
+            }
+        }
+        return recipeIngredients;
     }
 
     public SimpleRecipe scale(int factor) {
@@ -29,4 +44,35 @@ public class SimpleRecipe extends Recipe {
         return steps;
     }
 
+    public String getIngredientsAsString()
+    {
+        HashSet<Ingredient> recipeIngredients=calculateIngredients();
+        String ingredientsString="";
+        for(Ingredient ingredient:recipeIngredients){
+            ingredientsString+=ingredient.getQuantity()+ingredient.getUnit()+" of "+ingredient.getName()+"\n";
+        }
+        return ingredientsString;
+    }
+
+    public String getStepsAsString()
+    {
+        String stepsString="";
+        for(int i=0;i<steps.size();++i){
+            stepsString+=(i+1)+": "+steps.get(i).getDescripton()+"\n";
+        }
+        return stepsString;
+    }
+
+    public String formatRecipeAsString()
+    {
+        String recipeString="";
+        recipeString+="======"+name+"======\n";
+        recipeString+="  Serves: "+servings+"\n";
+        recipeString+="  Rating: "+rating+"\n\n";
+        recipeString+=introduction+"\n\n============\n\n";
+        recipeString+="Ingredients: \n"+getIngredientsAsString()+"\n";
+        recipeString+="Steps: \n"+getStepsAsString()+"\n";
+        recipeString+="============";
+        return recipeString;
+    }
 }

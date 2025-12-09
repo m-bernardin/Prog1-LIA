@@ -1,8 +1,12 @@
 import java.util.HashSet;
+
+/**
+ * @author Mathieu Bernardin
+ */
 public class Step {
-    HashSet<Ingredient> ingredients;
-    String description;
-    int time; 
+    private HashSet<Ingredient> ingredients;
+    private String description;
+    private int time; 
 
     public Step(HashSet<Ingredient> ingredients, String description, int time) {
         this.ingredients = ingredients;
@@ -22,4 +26,15 @@ public class Step {
         return time;
     }
     
+    public void setDescription(String description){
+        this.description=description;
+    }
+
+    public void setTime(int time){
+        this.time=time;
+    }
+
+    public void addIngredient(Ingredient ingredient){
+        ingredients.add(ingredient);
+    }
 }

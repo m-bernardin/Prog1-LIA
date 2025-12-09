@@ -1,21 +1,23 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 
+/**
+ * @author Mathieu Bernardin
+ */
 public class Recipe {
 
-    String name;
-    int servings;
-    ArrayList<Ingredient> ingredients;
-    HashSet<String> equipment;
-    int rating;
-    int time;
-    HashSet<Tags> tags;
+    protected String name;
+    protected int servings;
+    protected Integer rating;
+    protected String introduction;
+    private ArrayList<Ingredient> ingredients;
+    private HashSet<String> equipment;
+    private int time;
+    private HashSet<Tags> tags;
     
     public Recipe(String name, int servings) {
         this.name = name;
         this.servings = servings;
-        this.ingredients = new HashSet<>();
-        this.equipment = new HashSet<>();
         this.rating = 0;
     }
 
@@ -26,10 +28,13 @@ public class Recipe {
         rating -= 1;
     }
     
-    public Integer getRating() {
+    public int getRating() {
         return rating;
     }
 
+    public void setRating(int rating){
+        this.rating=rating;
+    }
     public boolean addStep(){
         return false;
     }
@@ -57,4 +62,22 @@ public class Recipe {
         this.name = name;
     }
     
+    public String getIntroduction()
+    {
+        return introduction;
+    }
+
+    public int getServings()
+    {
+        return servings;
+    }
+
+    public void setServings(int servings){
+        this.servings=servings;
+    }
+
+    public String formatRecipeAsString()
+    {
+        return "this is the generic form of this method, it is overidden with SimpleRecipe and ComplexRecipe";
+    }
 }
