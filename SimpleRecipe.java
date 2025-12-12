@@ -68,7 +68,7 @@ public class SimpleRecipe extends Recipe {
         return stepsString;
     }
 
-    public String formatRecipeAsString()
+    public String toString()
     {
         String recipeString="";
         recipeString+="======"+name+"======\n";
