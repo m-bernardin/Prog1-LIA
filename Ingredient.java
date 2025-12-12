@@ -38,4 +38,8 @@ public class Ingredient {
     public String toString(){
         return ""+quantity+unit+" of "+name;
     }
+    public Ingredient scale(int factor) {
+        Ingredient scaledIngredient=new Ingredient(name, quantity*factor, unit);
+        return scaledIngredient;
+    }
 }

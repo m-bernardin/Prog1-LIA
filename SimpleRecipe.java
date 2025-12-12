@@ -28,23 +28,21 @@ public class SimpleRecipe extends Recipe {
         
     }
 
-    public int calculateTime() {
+    public void calculateTime() {
         time=0;
         for(int i=0;i<steps.size();++i){
             time+=steps.get(i).getTime();
         }
-        return time;
     }
 
-    public ArrayList<Ingredient> calculateIngredients() {
-        ArrayList<Ingredient> recipeIngredients=new ArrayList<>();
+    public void calculateIngredients() {
+        ingredients=new ArrayList<>();
         for(int i=0;i<steps.size();++i){
             ArrayList<Ingredient> stepIngredients=steps.get(i).getIngredients();
             for(Ingredient ingredient:stepIngredients){
-                recipeIngredients.add(ingredient);
+                ingredients.add(ingredient);
             }
         }
-        return recipeIngredients;
     }
 
     public void calculateEquipment() {
@@ -54,7 +52,11 @@ public class SimpleRecipe extends Recipe {
     }
 
     public SimpleRecipe scale(int factor) {
-        return null;
+        SimpleRecipe scaledRecipe = new SimpleRecipe(name, servings*factor);
+        for(int i=0;i<steps.size();++i){
+            scaledRecipe.addStep(steps.get(i).scale(factor));
+        }
+        return scaledRecipe;
     }
     
     public ArrayList<Step> getSteps() {
@@ -96,5 +98,9 @@ public class SimpleRecipe extends Recipe {
         calculateIngredients();
         calculateTime();
         recipeCompleteFlag=true;
+    }
+
+    public boolean equals(Recipe comparedRecipe){
+        return comparedRecipe.toString().equals(this.toString());
     }
 }

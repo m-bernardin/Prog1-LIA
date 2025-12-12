@@ -1,4 +1,3 @@
-import java.util.HashSet;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +13,11 @@ public class Step {
         this.ingredients = ingredients;
         this.description = description;
         this.time = time;
+        this.equipment=equipment;
+    }
+
+    public Step(String description,String equipment){
+        this.description=description;
         this.equipment=equipment;
     }
 
@@ -47,5 +51,30 @@ public class Step {
 
     public void setEquipment(String equipment) {
         this.equipment = equipment;
+    }
+
+    public Step scale(int factor) {
+        Step scaledStep=new Step(description, equipment);
+        for(int i=0;i<ingredients.size();++i){
+            scaledStep.addIngredient(ingredients.get(i).scale(factor));
+        }
+        return scaledStep;
+    }
+
+    public String toString()
+    {
+        String stepString="Step details:\n";
+        stepString+="Description: "+description+"\n";
+        stepString+="Time: "+time+"\n";
+        stepString+="Equipment: "+equipment+"\n";
+        stepString+="Ingredients: \n";
+        for(int i=0;i<ingredients.size();++i){
+            stepString+=ingredients.get(i).toString()+"\n";
+        }
+        return stepString;
+    }
+
+    public boolean equals(Step comparedStep){
+        return comparedStep.toString().equals(this.toString());
     }
 }

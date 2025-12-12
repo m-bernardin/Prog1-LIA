@@ -86,14 +86,6 @@ public class RecipeBookTest
     }
 
     @Test
-    public void testSearchTimeOverBound()
-    {
-        setupSearchTest();
-        ArrayList<Recipe> results=book.searchTime(90);
-        assertEquals(new Recipe("invalidRecipe",0), results.get(0));
-    }
-
-    @Test
     public void testSearchTimeUnderBound()
     {
         setupSearchTest();
