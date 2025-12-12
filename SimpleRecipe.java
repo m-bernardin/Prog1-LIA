@@ -1,8 +1,12 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
+ * A type of recipe which contains only Steps.
+ * This class specifies many generic methods inherited from Recipe.
+ * @version 1.0
  * @author Mathieu Bernardin
+ * @see Recipe
+ * @see Step
  */
 public class SimpleRecipe extends Recipe {
 
