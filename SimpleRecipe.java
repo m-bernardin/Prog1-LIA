@@ -54,7 +54,7 @@ public class SimpleRecipe extends Recipe {
     {
         String ingredientsString="";
         for(Ingredient ingredient:ingredients){
-            ingredientsString+=ingredient.getQuantity()+ingredient.getUnit()+" of "+ingredient.getName()+"\n";
+            ingredientsString=ingredientsString+ingredient.getQuantity()+ingredient.getUnit()+" of "+ingredient.getName()+"\n";
         }
         return ingredientsString;
     }
