@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;;
 
 /**
  * A type of recipe which contains only Steps.
@@ -9,13 +10,26 @@ import java.util.ArrayList;
  * @see Step
  */
 public class SimpleRecipe extends Recipe {
-
+    /**
+     * The list of steps required to follow this recipe, in order of execution. 
+     * @see Step
+     */
     private ArrayList<Step> steps = new ArrayList<>();
-    
+    /**
+     * The default constructor for this class. Functionally identical to the superclass' constructor.
+     * @param name - the name of this recipe
+     * @param servings - how many servings this recipe makes
+     * @see Recipe
+     */
     public SimpleRecipe(String name, int servings) {
         super(name, servings);
     }
-    
+    /**
+     * Adds the specified Step to the end of the instructions for this recipe
+     * @param step - the step to be added to this recipe
+     * @return true if the provided step was succesfully added; false otherwise
+     * @see Step
+     */
     public boolean addStep(Step step) {
         Boolean invalid=false;
         for(Ingredient ingredient:step.getIngredients()){
@@ -29,9 +43,11 @@ public class SimpleRecipe extends Recipe {
             return true;
         }
         return false;
-        
     }
-
+    /**
+     * Calculates the total estimated time for this recipe, based on the estimated time of each of the current Steps, and assigns it to the time field
+     * @return the total time calculated
+     */
     public int calculateTime() {
         time=0;
         for(int i=0;i<steps.size();++i){
@@ -39,7 +55,11 @@ public class SimpleRecipe extends Recipe {
         }
         return time;
     }
-
+    /**
+     * Calculates all the ingredients used in this recipe.
+     * @return the ArrayList of ingredients calculated 
+     * @see Ingredient
+     */
     public ArrayList<Ingredient> calculateIngredients() {
         ingredients=new ArrayList<>();
         for(int i=0;i<steps.size();++i){
@@ -50,13 +70,23 @@ public class SimpleRecipe extends Recipe {
         }
         return ingredients;
     }
-
-    public void calculateEquipment() {
+    /**
+     * Calculates all the equipment used in this recipe.
+     * @return the HashSet of equipment calculated
+     */
+    public HashSet<String> calculateEquipment() {
         for(int i=0;i<steps.size();++i){
             equipment.add(steps.get(i).getEquipment());
         }
+        return equipment;
     }
-
+    /**
+     * Scales this recipe by multiplying the quantity of required Ingredients for each of this recipe's Steps by the provided factor.
+     * @param factor - the factor by which to scale this recipe
+     * @return this recipe scaled by the provided factor
+     * @see Step
+     * @see Ingredient
+     */
     public SimpleRecipe scale(int factor) {
         SimpleRecipe scaledRecipe = new SimpleRecipe(name, servings*factor);
         for(int i=0;i<steps.size();++i){
@@ -64,11 +94,15 @@ public class SimpleRecipe extends Recipe {
         }
         return scaledRecipe;
     }
-    
+
     public ArrayList<Step> getSteps() {
         return steps;
     }
-
+    /**
+     * Formulates all known Ingredients as a single String.
+     * @return the formulated String
+     * @see Ingredient
+     */
     public String getIngredientsAsString()
     {
         String ingredientsString="";
@@ -77,7 +111,11 @@ public class SimpleRecipe extends Recipe {
         }
         return ingredientsString;
     }
-
+    /**
+     * Formulates all known Steps as a single String.
+     * @return the formulated String
+     * @see Step
+     */
     public String getStepsAsString()
     {
         String stepsString="";
@@ -86,8 +124,11 @@ public class SimpleRecipe extends Recipe {
         }
         return stepsString;
     }
-
-    public String toString()
+    /**
+     * Formulates this recipe as a single String.
+     * @return the formulated String
+     */
+    public String formatAsString()
     {
         String recipeString="";
         recipeString+="======"+name+"======\n";
@@ -99,14 +140,15 @@ public class SimpleRecipe extends Recipe {
         recipeString+="============";
         return recipeString;
     }
-
+    /**
+     * Sets this recipe to be complete by calling all calculate methods of this recipe. 
+     * For use by the RecipeBookManager
+     * @see RecipeBookManager
+     */
     public void completeRecipe(){
         calculateIngredients();
         calculateTime();
+        calculateEquipment();
         recipeCompleteFlag=true;
-    }
-
-    public boolean equals(Recipe comparedRecipe){
-        return comparedRecipe.toString().equals(this.toString());
     }
 }

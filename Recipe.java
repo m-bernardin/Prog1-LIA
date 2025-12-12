@@ -207,8 +207,6 @@ public class Recipe {
 
     /**
      * Indicates wether another Recipe is essentialy the same as this one - that is to say they have the same Ingredients and identical instructions.
-     * 
-     * This is the generic version of this method, and so it will always return false.
      * @param comparedRecipe - the recipe with which to compare
      * @return true if these Recipes contain the same Ingredients, and the same Steps; false otherwise
      */
@@ -252,5 +250,12 @@ public class Recipe {
     public String getTimeAsString(){
         return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
     }
-
+    /**
+     * Generic form of the method of the same in each of the child classes.
+     * @see SimpleRecipe
+     * @see ComplexRecipe
+     */
+    public String formatAsString(){
+        return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
+    }
 }
