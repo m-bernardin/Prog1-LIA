@@ -71,6 +71,10 @@ public class Recipe {
         return time;
     }
 
+    public void setTime(int time){
+        this.time=time;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -93,8 +97,38 @@ public class Recipe {
         this.servings=servings;
     }
 
-    public String formatRecipeAsString()
-    {
-        return "this is the generic form of this method, it is overidden with SimpleRecipe and ComplexRecipe";
+    public boolean getRecipeComplete(){
+        return recipeCompleteFlag;
     }
+
+    public void completeRecipe(){
+        recipeCompleteFlag=true;
+    }
+
+    public String toString()
+    {
+        return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
+    }
+
+    /**
+     * Indicates wether another Recipe is essentialy the same as this one - that is to say they have the same Ingredients and identical instructions.
+     * 
+     * This is the generic version of this method, and so it will always return false.
+     * @param comparedRecipe - the recipe with which to compare
+     * @return true if these Recipes contain the same Ingredients, and the same Steps; false otherwise
+     */
+    public boolean equals(Recipe comparedRecipe)
+    {
+        return false;
+    }
+
+    public void calculateTime(){}
+    public void calculateIngredients(){}
+    public String getIngredientsAsString(){
+        return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
+    }
+    public String getTimeAsString(){
+        return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
+    }
+    
 }
