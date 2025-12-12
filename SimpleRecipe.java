@@ -17,8 +17,19 @@ public class SimpleRecipe extends Recipe {
     }
     
     public boolean addStep(Step step) {
-        steps.add(step);
-        return true;
+        Boolean invalid=false;
+        for(Ingredient ingredient:step.getIngredients()){
+            if(ingredient.getQuantity()<=0){
+                invalid=true;
+                break;
+            }
+        }
+        if(!invalid){
+            steps.add(step);
+            return true;
+        }
+        return false;
+        
     }
 
     public void calculateTime() {

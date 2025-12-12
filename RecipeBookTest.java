@@ -73,7 +73,7 @@ public class RecipeBookTest
     public void testSearchIngredients()
     {
         setupSearchTest();
-        ArrayList<Recipe> results=book.searchIngredient("egg");
+        ArrayList<Recipe> results=book.searchIngredient("Egg");
         assertEquals(recipe2,results.get(1));
     }
 
@@ -103,10 +103,14 @@ public class RecipeBookTest
 
     public void initializeTestRecipes()
     {
+        ArrayList<Ingredient> ingredients=new ArrayList<>();
+        ingredients.add(new Ingredient("Egg", 2, Units.INDIVIDUAL));
         recipe1=new SimpleRecipe("Pancakes",4);
+        recipe1.addStep(new Step(ingredients, "Beat eggs", 3, "whisk"));
         recipe2=new Recipe("Waffles", 4);
         recipe3=new Recipe("Pasta", 2);
         recipe4=new SimpleRecipe("Omelette",2);
+        recipe2.addStep(new Step(ingredients, "Beat eggs", 3, "whisk"));
     }
 
     public void setupSearchTest()

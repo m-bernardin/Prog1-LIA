@@ -7,6 +7,7 @@ public class RecipeBook {
 
     public RecipeBook(String title) {
         this.title = title;
+        recipes=new ArrayList<>();
         
     }
     public void addRecipe(Recipe recipe) {
@@ -20,7 +21,7 @@ public class RecipeBook {
     }
 
     public void downvoteRecipe(int recipeIndex) {
-        recipes.get(recipeIndex).upVote();
+        recipes.get(recipeIndex).downVote();
     }
     public ArrayList<Recipe> searchName(String name){
         ArrayList<Recipe> results = new ArrayList<>();

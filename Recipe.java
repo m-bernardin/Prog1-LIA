@@ -62,6 +62,9 @@ public class Recipe {
         this.name = name;
         this.servings = servings;
         this.rating = 0;
+        tags=new HashSet<>();
+        ingredients=new ArrayList<>();
+        equipment=new HashSet<>(); 
     }
 
     /**
@@ -197,6 +200,11 @@ public class Recipe {
         
     }
 
+    public String toString()
+    {
+        return name+" for "+servings;
+    }
+
     /**
      * Indicates wether another Recipe is essentialy the same as this one - that is to say they have the same Ingredients and identical instructions.
      * 
@@ -206,6 +214,9 @@ public class Recipe {
      */
     public boolean equals(Recipe comparedRecipe)
     {
+        if(name.equals(comparedRecipe.getName())&&ingredients.equals(comparedRecipe.getIngredients())){
+            return true;
+        }
         return false;
     }
     /**
@@ -213,16 +224,15 @@ public class Recipe {
      * @see SimpleRecipe
      * @see ComplexRecipe
      */
-    public void calculateTime(){
-
+    public int calculateTime(){
+        return 0;
     }
     /**
      * Generic form of the method of the same in each of the child classes
      * @see SimpleRecipe
      * @see ComplexRecipe
-     */
-    public void calculateIngredients(){
-
+     */    public ArrayList<Ingredient> calculateIngredients(){
+        return new ArrayList<>();
     }
     /**
      * Generic form of the method of the same in each of the child classes
