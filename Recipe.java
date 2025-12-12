@@ -212,7 +212,7 @@ public class Recipe {
      */
     public boolean equals(Recipe comparedRecipe)
     {
-        if(name.equals(comparedRecipe.getName())&&ingredients.equals(comparedRecipe.getIngredients())){
+        if(name.trim().toLowerCase().equals(comparedRecipe.getName().trim().toLowerCase())&&ingredients.equals(comparedRecipe.getIngredients())){
             return true;
         }
         return false;
