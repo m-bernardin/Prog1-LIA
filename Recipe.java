@@ -102,7 +102,7 @@ public class Recipe {
     }
 
     public void completeRecipe(){
-        recipeCompleteFlag=true;
+        
     }
 
     public String toString()
@@ -122,13 +122,20 @@ public class Recipe {
         return false;
     }
 
-    public void calculateTime(){}
-    public void calculateIngredients(){}
+    public void calculateTime(){
+
+    }
+
+    public void calculateIngredients(){
+
+    }
+
     public String getIngredientsAsString(){
         return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
     }
+
     public String getTimeAsString(){
         return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
     }
-    
+
 }

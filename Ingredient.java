@@ -28,4 +28,9 @@ public class Ingredient {
     public void setQuantity(int qty){
         quantity=qty;
     }
+
+    public Ingredient scale(int factor) {
+        Ingredient scaledIngredient=new Ingredient(name, quantity*factor, unit);
+        return scaledIngredient;
+    }
 }
