@@ -111,6 +111,9 @@ public class RecipeBookTest
         recipe3=new Recipe("Pasta", 2);
         recipe4=new SimpleRecipe("Omelette",2);
         recipe2.addStep(new Step(ingredients, "Beat eggs", 3, "whisk"));
+        recipe1.addTag(Tags.BREAKFAST);
+        recipe2.addTag(Tags.BREAKFAST);
+        recipe4.addTag(Tags.BREAKFAST);
     }
 
     public void setupSearchTest()
