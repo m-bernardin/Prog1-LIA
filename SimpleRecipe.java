@@ -28,14 +28,15 @@ public class SimpleRecipe extends Recipe {
         
     }
 
-    public void calculateTime() {
+    public int calculateTime() {
         time=0;
         for(int i=0;i<steps.size();++i){
             time+=steps.get(i).getTime();
         }
+        return time;
     }
 
-    public void calculateIngredients() {
+    public ArrayList<Ingredient> calculateIngredients() {
         ingredients=new ArrayList<>();
         for(int i=0;i<steps.size();++i){
             ArrayList<Ingredient> stepIngredients=steps.get(i).getIngredients();
@@ -43,6 +44,7 @@ public class SimpleRecipe extends Recipe {
                 ingredients.add(ingredient);
             }
         }
+        return ingredients;
     }
 
     public void calculateEquipment() {

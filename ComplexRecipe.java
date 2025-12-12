@@ -6,8 +6,9 @@ public class ComplexRecipe extends Recipe{
     
     public ComplexRecipe(String name, int servings){
         super(name, servings);
+        subRecipes=new ArrayList<>();
     }
-    public boolean addSubRecipe(SimpleRecipe recipe) {
+    public boolean addRecipe(SimpleRecipe recipe) {
         subRecipes.add(recipe);
         return true;
     }
@@ -40,7 +41,7 @@ public class ComplexRecipe extends Recipe{
     public ComplexRecipe scale(int factor) {
         ComplexRecipe scaledRecipe=new ComplexRecipe(name, servings*factor);
         for(SimpleRecipe recipe:subRecipes){
-            scaledRecipe.addSubRecipe(recipe.scale(factor));
+            scaledRecipe.addRecipe(recipe.scale(factor));
         }
         return scaledRecipe;
     }
