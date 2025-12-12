@@ -220,7 +220,7 @@ public class Recipe {
         return false;
     }
     /**
-     * Generic form of the method of the same in each of the child classes
+     * Generic form of the method of the same in each of the child classes.
      * @see SimpleRecipe
      * @see ComplexRecipe
      */
@@ -228,14 +228,16 @@ public class Recipe {
         return 0;
     }
     /**
-     * Generic form of the method of the same in each of the child classes
+     * Generic form of the method of the same in each of the child classes.
+     * @see Ingredient
      * @see SimpleRecipe
      * @see ComplexRecipe
-     */    public ArrayList<Ingredient> calculateIngredients(){
+     */    
+    public ArrayList<Ingredient> calculateIngredients(){
         return new ArrayList<>();
     }
     /**
-     * Generic form of the method of the same in each of the child classes
+     * Generic form of the method of the same in each of the child classes.
      * @see SimpleRecipe
      * @see ComplexRecipe
      */
@@ -243,7 +245,7 @@ public class Recipe {
         return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
     }
     /**
-     * Generic form of the method of the same in each of the child classes
+     * Generic form of the method of the same in each of the child classes.
      * @see SimpleRecipe
      * @see ComplexRecipe
      */
