@@ -26,7 +26,7 @@ public class ComplexRecipe extends Recipe{
             for(Ingredient ingredient:subRecipe.getIngredients()){
                 int i=ingredientInList(ingredient,ingredients);
                 if(i!=-1){
-                    int newQty=ingredients.get(i).getQuantity()+ingredient.getQuantity();
+                    double newQty=ingredients.get(i).getQuantity()+ingredient.getQuantity();
                     ingredients.get(i).setQuantity(newQty);
                 }
                 else{

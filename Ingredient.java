@@ -10,22 +10,19 @@ public class Ingredient {
         this.unit = unit;
     }
 
-    public int getQuantity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getQuantity'");
+    public double getQuantity() {
+        return quantity;
     }
 
-    public int getUnit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUnit'");
+    public Units getUnit() {
+        return unit;
     }
 
-    public int getName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getName'");
+    public String getName() {
+        return name;
     }
 
-    public void setQuantity(int qty){
+    public void setQuantity(double qty){
         quantity=qty;
     }
 
