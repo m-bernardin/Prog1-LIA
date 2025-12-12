@@ -20,6 +20,9 @@ public class Recipe {
         this.name = name;
         this.servings = servings;
         this.rating = 0;
+        tags=new HashSet<>();
+        ingredients=new ArrayList<>();
+        equipment=new HashSet<>(); 
     }
 
     public void upVote() {
@@ -37,7 +40,7 @@ public class Recipe {
         this.rating=rating;
     }
 
-    public boolean addStep(Recipe recipe){
+    public boolean addStep(Step step){
         return false;
     }
 
@@ -107,7 +110,7 @@ public class Recipe {
 
     public String toString()
     {
-        return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
+        return name+" for "+servings;
     }
 
     /**
@@ -119,11 +122,18 @@ public class Recipe {
      */
     public boolean equals(Recipe comparedRecipe)
     {
+        if(name.equals(comparedRecipe.getName())&&ingredients.equals(comparedRecipe.getIngredients())){
+            return true;
+        }
         return false;
     }
 
-    public void calculateTime(){}
-    public void calculateIngredients(){}
+    public int calculateTime(){
+        return 0;
+    }
+    public ArrayList<Ingredient> calculateIngredients(){
+        return new ArrayList<>();
+    }
     public String getIngredientsAsString(){
         return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
     }

@@ -30,11 +30,16 @@ public class SimpleRecipeTest {
     
     }
     @Test
-    public void testCalculateIngrediants() {
-        HashSet<Ingredient> expectedIngredients = new HashSet<>();
+    public void testCalculateIngredients() {
+        ArrayList<Ingredient> expectedIngredients = new ArrayList<>();
         expectedIngredients.add(new Ingredient("Sliced Bread",2,Units.INDIVIDUAL));
         expectedIngredients.add(new Ingredient("Butter",1,Units.TABLESPOON));
         expectedIngredients.add(new Ingredient("Cheese slice",2,Units.INDIVIDUAL));
+        /*System.out.println("yapyapyap");
+        System.out.println(expectedIngredients.get(0).equals(simpleRecipe.calculateIngredients().get(0)));
+        System.out.println(expectedIngredients.get(1).equals(simpleRecipe.calculateIngredients().get(1)));
+        System.out.println(expectedIngredients.get(2).equals(simpleRecipe.calculateIngredients().get(2)));
+        System.out.println(expectedIngredients.equals(simpleRecipe.calculateIngredients()));*/
         assertEquals(expectedIngredients, simpleRecipe.calculateIngredients());
     
     }
@@ -63,11 +68,10 @@ public class SimpleRecipeTest {
         assertFalse(simpleRecipe.addRecipe(new Recipe("Bolognese Sauce",8)));
     }
     @Test
-    public void testIngrediantQtyBoundry(){
+    public void testIngredientQtyBoundry(){
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Butter",-1,Units.TABLESPOON));
-        simpleRecipe.addStep(new Step(ingredients,"Fry sandwich on both sides",7,"Stove"));
-        assertEquals(2,simpleRecipe.getSteps().size());
+        assertFalse(simpleRecipe.addStep(new Step(ingredients,"Fry sandwich on both sides",7,"Stove")));
     }
     
 
