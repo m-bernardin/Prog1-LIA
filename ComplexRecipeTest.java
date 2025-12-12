@@ -57,6 +57,6 @@ public class ComplexRecipeTest{
     public void scaleTest()
     {
         setupSubrecipes();
-        assertEquals("placeholder stringt", recipe.scale(2.5));
+        assertEquals("placeholder stringt", recipe.scale(2));
     }
 }

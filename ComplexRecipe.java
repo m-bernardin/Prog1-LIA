@@ -21,7 +21,19 @@ public class ComplexRecipe extends Recipe{
     }
 
     public ArrayList<Ingredient> calculateIngredients() {
-        ArrayList<Ingredient> ingredients=subRecipes.get(0).getIngredients();
+        ArrayList<Ingredient> ingredients=new ArrayList<>();
+        for(Recipe subRecipe:subRecipes){
+            for(Ingredient ingredient:subRecipe.getIngredients()){
+                int i=ingredientInList(ingredient,ingredients);
+                if(i!=-1){
+                    int newQty=ingredients.get(i).getQuantity()+ingredient.getQuantity();
+                    ingredients.get(i).setQuantity(newQty);
+                }
+                else{
+                    ingredients.add(ingredient);
+                }
+            }
+        }
         return ingredients;
     }
 
@@ -35,5 +47,14 @@ public class ComplexRecipe extends Recipe{
     
     public ArrayList<SimpleRecipe> getRecipes() {
         return subRecipes;
+    }
+
+    private int ingredientInList(Ingredient ingredient,ArrayList<Ingredient> ingredients){
+        for(int i=0; i<ingredients.size();i++){
+            if(ingredient.getName()==ingredients.get(i).getName()){
+                return i;
+            }
+        }
+        return -1;
     }
 }

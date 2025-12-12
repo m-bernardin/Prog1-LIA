@@ -24,4 +24,8 @@ public class Ingredient {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getName'");
     }
+
+    public void setQuantity(int qty){
+        quantity=qty;
+    }
 }

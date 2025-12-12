@@ -37,12 +37,19 @@ public class Recipe {
         this.rating=rating;
     }
 
-    public boolean addStep(){
+    public boolean addStep(Recipe recipe){
         return false;
     }
 
-    public boolean addRecipe(){
+    public boolean addRecipe(Recipe recipe){
         return false;
+    }
+
+    public Recipe scale(int factor){
+        return null;
+    }
+    public void addTag(Tags tag){
+        tags.add(tag);
     }
 
     public String getName() {

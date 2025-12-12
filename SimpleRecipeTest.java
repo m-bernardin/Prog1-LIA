@@ -13,13 +13,13 @@ public class SimpleRecipeTest {
     @BeforeEach
     public void setUp() {
         simpleRecipe = new SimpleRecipe("Grilled Cheese",1);
-        HashSet<Ingredient> ingredients = new HashSet<>();
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Sliced Bread",2,Units.INDIVIDUAL));
         ingredients.add(new Ingredient("Butter",1,Units.TABLESPOON));
-        simpleRecipe.addStep(new Step(ingredients,"Butter the bread",1));
-        ingredients = new HashSet<>();
+        simpleRecipe.addStep(new Step(ingredients,"Butter the bread",1,""));
+        ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Cheese slice",2,Units.INDIVIDUAL));
-        simpleRecipe.addStep(new Step(ingredients,"Make a sandwich with the cheese slices",1));
+        simpleRecipe.addStep(new Step(ingredients,"Make a sandwich with the cheese slices",1,""));
     }
     @AfterEach
     public void tearDown() {   
@@ -42,31 +42,31 @@ public class SimpleRecipeTest {
     @Test
     public void testScale() {
         SimpleRecipe expectedRecipe = new SimpleRecipe("Grilled Cheese",2);
-        HashSet<Ingredient> ingredients = new HashSet<>();
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Sliced Bread",4,Units.INDIVIDUAL));
         ingredients.add(new Ingredient("Butter",2,Units.TABLESPOON));
-        expectedRecipe.addStep(new Step(ingredients,"Butter the bread",1));
-        ingredients = new HashSet<>();
+        expectedRecipe.addStep(new Step(ingredients,"Butter the bread",1,""));
+        ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Cheese slice",4,Units.INDIVIDUAL));
-        expectedRecipe.addStep(new Step(ingredients,"Make a sandwich with the cheese slices",1));
+        expectedRecipe.addStep(new Step(ingredients,"Make a sandwich with the cheese slices",1,""));
         assertEquals(expectedRecipe, simpleRecipe.scale(2));
 
         //scale will now return a new SimpleRecipe object
     }
     @Test
     public void testAddStep() {
-        simpleRecipe.addStep(new Step(new HashSet<>(),"Fry sandwich on both sides",7));
+        simpleRecipe.addStep(new Step(new ArrayList<>(),"Fry sandwich on both sides",7,""));
         assertEquals(3,simpleRecipe.getSteps().size());
     }
     @Test
     public void testAddRecipe(){
-        assertFalse(simpleRecipe.addRecipe());
+        assertFalse(simpleRecipe.addRecipe(new Recipe("Bolognese Sauce",8)));
     }
     @Test
     public void testIngrediantQtyBoundry(){
-        HashSet<Ingredient> ingredients = new HashSet<>();
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Butter",-1,Units.TABLESPOON));
-        simpleRecipe.addStep(new Step(ingredients,"Fry sandwich on both sides",7));
+        simpleRecipe.addStep(new Step(ingredients,"Fry sandwich on both sides",7,"Stove"));
         assertEquals(2,simpleRecipe.getSteps().size());
     }
     

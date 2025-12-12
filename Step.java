@@ -1,22 +1,23 @@
 import java.util.HashSet;
+import java.util.ArrayList;
 
 /**
  * @author Mathieu Bernardin
  */
 public class Step {
-    private HashSet<Ingredient> ingredients;
+    private ArrayList<Ingredient> ingredients;
     private String description;
     private int time; 
     private String equipment;
 
-    public Step(HashSet<Ingredient> ingredients, String description, int time,String equipment) {
+    public Step(ArrayList<Ingredient> ingredients, String description, int time,String equipment) {
         this.ingredients = ingredients;
         this.description = description;
         this.time = time;
         this.equipment=equipment;
     }
 
-    public HashSet<Ingredient> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 

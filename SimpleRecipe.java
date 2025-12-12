@@ -17,22 +17,23 @@ public class SimpleRecipe extends Recipe {
         return true;
     }
 
-    public void calculateTime() {
+    public int calculateTime() {
         time=0;
         for(int i=0;i<steps.size();++i){
             time+=steps.get(i).getTime();
         }
+        return time;
     }
 
-    public void calculateIngredients() {
-        HashSet<Ingredient> recipeIngredients=new HashSet<>();
+    public ArrayList<Ingredient> calculateIngredients() {
+        ArrayList<Ingredient> recipeIngredients=new ArrayList<>();
         for(int i=0;i<steps.size();++i){
-            HashSet<Ingredient> stepIngredients=steps.get(i).getIngredients();
+            ArrayList<Ingredient> stepIngredients=steps.get(i).getIngredients();
             for(Ingredient ingredient:stepIngredients){
                 recipeIngredients.add(ingredient);
             }
         }
-        ingredients=recipeIngredients;
+        return recipeIngredients;
     }
 
     public void calculateEquipment() {

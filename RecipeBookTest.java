@@ -31,7 +31,7 @@ public class RecipeBookTest
     public void testUpvoteRecipe()
     {
         book.addRecipe(recipe1);
-        book.upvoteRecipe(recipe1);
+        book.upvoteRecipe(0);
         assertEquals(1,recipe1.getRating());
     }
 
@@ -39,7 +39,7 @@ public class RecipeBookTest
     public void testDownvoteRecipe()
     {
         book.addRecipe(recipe1);
-        book.downvoteRecipe(recipe1);
+        book.downvoteRecipe(0);
         assertEquals(-1,recipe1.getRating());
     }
 
@@ -48,17 +48,10 @@ public class RecipeBookTest
     {
         book.addRecipe(recipe1);
         book.addRecipe(recipe2);
-        book.upvoteRecipe(recipe2);
+        book.upvoteRecipe(1);
         assertEquals(recipe2,book.getTopRated());
     }
 
-    @Test
-    public void testGetAll()
-    {
-        book.addRecipe(recipe2);
-        book.addRecipe(recipe1);
-        assertEquals(new ArrayList<>(), book.getAll());
-    }
 
     @Test
     public void testAddRecipe()

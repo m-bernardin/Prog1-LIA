@@ -26,7 +26,7 @@ public class RecipeTest {
     }
     @Test
     public void testAddTag() {
-        recipe.addTag(Tags.VEGETARIAN)
+        recipe.addTag(Tags.VEGETARIAN);
         assertTrue(recipe.getTags().contains(Tags.VEGETARIAN));
     }
         

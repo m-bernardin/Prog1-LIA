@@ -1,3 +1,3 @@
 public enum Tags {
-    
+    VEGETARIAN,VEGAN,INDIAN,ITALIAN,BREAKFAST;
 }
