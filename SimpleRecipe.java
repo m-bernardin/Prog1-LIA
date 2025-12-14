@@ -47,10 +47,12 @@ public class SimpleRecipe extends Recipe {
         return ingredients;
     }
 
-    public void calculateEquipment() {
+    public HashSet<String> calculateEquipment() {
+        HashSet<String> equipment=new HashSet<>();
         for(int i=0;i<steps.size();++i){
             equipment.add(steps.get(i).getEquipment());
         }
+        return equipment;
     }
 
     public SimpleRecipe scale(int factor) {

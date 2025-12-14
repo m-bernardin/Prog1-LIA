@@ -79,5 +79,8 @@ public class RecipeBook {
     public ArrayList<Recipe> getRecipes() {
         return recipes;
     }
+    public String toString(){
+        return title;
+    }
 }
 

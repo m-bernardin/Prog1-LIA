@@ -108,7 +108,7 @@ public class Recipe {
         
     }
 
-    public String toString()
+    public String toSimpleString()
     {
         return name+" for "+servings;
     }
@@ -134,12 +134,21 @@ public class Recipe {
     public ArrayList<Ingredient> calculateIngredients(){
         return new ArrayList<>();
     }
+    public HashSet<String> calculateEquipment(){
+        return new HashSet<>();
+    }
     public String getIngredientsAsString(){
         return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
     }
 
     public String getTimeAsString(){
         return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
+    }
+
+    public void confirmRecipe(){
+        ingredients=calculateIngredients();
+        time=calculateTime();
+        equipment=calculateEquipment();
     }
 
 }
