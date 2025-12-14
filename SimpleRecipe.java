@@ -140,6 +140,17 @@ public class SimpleRecipe extends Recipe {
         recipeString+="============";
         return recipeString;
     }
+
+    public String formatAsSubRecipeString()
+    {
+        String recipeString="";
+        recipeString+="-----"+name+"-----\n";
+        recipeString+=introduction+"\n\n-------------\n\n";
+        recipeString+="Ingredients: \n"+getIngredientsAsString()+"\n";
+        recipeString+="Steps: \n"+getStepsAsString()+"\n";
+        recipeString+="------------";
+        return recipeString;
+    }
     /**
      * Sets this recipe to be complete by calling all calculate methods of this recipe. 
      * For use by the RecipeBookManager

@@ -187,6 +187,11 @@ public class Recipe {
     public void setServings(int servings){
         this.servings=servings;
     }
+    public String formatAsSubRecipeString()
+    {
+        String recipeString="";
+        return recipeString;
+    }
 
     public boolean getRecipeComplete(){
         return recipeCompleteFlag;

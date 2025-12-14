@@ -47,9 +47,9 @@ public class ComplexRecipeTest{
     @Test
     public void addRecipeTest()
     {
-        SimpleRecipe subrecipe=new SimpleRecipe("Sauce", 2);
+        Recipe subrecipe=new SimpleRecipe("Sauce", 2);
         recipe.addRecipe(subrecipe);
-        ArrayList<SimpleRecipe> subrecipes=recipe.getRecipes();
+        ArrayList<Recipe> subrecipes=recipe.getRecipes();
         assertEquals(subrecipe, subrecipes.get(0));
     }
 

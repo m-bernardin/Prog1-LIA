@@ -2,12 +2,33 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class InputManager {
+    /**
+     * The state of the input manager determines what page the user is on.
+     */
     private States state;
+    /**
+     * Scanner to read user input.
+     */
     private Scanner reader;
+    /**
+     * A collection of recipe books.
+     */
     private ArrayList<RecipeBook> books;
+    /**
+     * The recipe book the user is currently exploring.
+     */
     private RecipeBook openBook;
+    /**
+     * The results of the most recent search.
+     */
     private ArrayList<Recipe> results;
+    /**
+     * The last input read in by the scanner.
+     */
     private String input;
+    /**
+     * The recipe the user is currently viewing.
+     */
     private Recipe openRecipe;
 
     public InputManager(){
@@ -17,9 +38,15 @@ public class InputManager {
         books=new ArrayList<>();
         setDefaultRecipes();
     }
+    /**
+     * Enumeration of all possible pages the user can be on.
+     */
     public enum States{
-        RECIPEBOOKS,WITHINBOOK,ADDRECIPE,SEARCH,SEARCHRESULTS,RECIPE;
+        RECIPEBOOKS,WITHINBOOK,ADDRECIPE,ADDRECIPEBOOK,SEARCH,SEARCHRESULTS,RECIPE;
     }
+    /**
+     * Chooses how to get and handle user input based on the current state.
+     */
     public void getInput(){
         
         switch(state){
@@ -27,7 +54,10 @@ public class InputManager {
                 recipeBooksPage();
                 break;
             case States.ADDRECIPE:
-                System.out.println("Adding Recipe");
+                addRecipePage();
+                break;
+            case States.ADDRECIPEBOOK:
+                addRecipeBookPage();
                 break;
             case States.WITHINBOOK:
                 openBookPage();
@@ -43,6 +73,9 @@ public class InputManager {
         }
 
     }
+    /**
+     * Allows the user to choose a recipe book to open, or create a new one.
+     */
     private void recipeBooksPage(){
         System.out.printf("\nPlease enter the number of the recipe book you would like to open. \n\n");
         for(int i=0;i<books.size();i++){
@@ -57,7 +90,7 @@ public class InputManager {
                 System.out.println("Please enter a number present in the options.");
             }
             else if(intInput==books.size()){
-                state=States.ADDRECIPE;
+                state=States.ADDRECIPEBOOK;
             }
             else{
                 openBook=books.get(intInput);
@@ -68,6 +101,9 @@ public class InputManager {
             System.out.println("Please enter a number.");
         }
     }
+    /**
+     * Presents options of how the user can navigate the current open recipe book, including searching, viewing all recipes or creating a new recipe.
+     */
     private void openBookPage(){
         System.out.println("Book open: "+openBook);
         System.out.println("Enter the number for what you would like to do.");
@@ -100,6 +136,9 @@ public class InputManager {
             System.out.println("Please enter a number.");
         }
     }
+    /**
+     * Allows the user to choose a caracteristic to seaarch by within a recipe book, collects a parameter for the search and stores the result.
+     */
     private void searchPage(){
         System.out.println("Please enter the number for what you would like to search by, or enter 'x' to go back to options.");
         System.out.println("""
@@ -241,6 +280,9 @@ public class InputManager {
         }
 
     }
+    /**
+     * Displays the results of the most recent search and allows the user to choose one to view in full.
+     */
     private void searchResultsPage(){
         System.out.println("Enter the number of a search result to see the full recipe, or enter 'x' to go back to search.\n");
         System.out.println("Search results:");
@@ -269,8 +311,11 @@ public class InputManager {
         }
 
     }
+    /**
+     * Displays the full recipe and allows the user to upvote or downvote the recipe.
+     */
     private void recipePage(){
-        System.out.println(openRecipe);
+        System.out.println(openRecipe.formatAsString());
         System.out.println("Enter '1' to upvote this recipe, '2' to downvote it, or 'x' to go back to search results.");
         System.out.print("\n> ");
         input=reader.nextLine();
@@ -287,6 +332,23 @@ public class InputManager {
             System.out.println("Please enter something that appears in the options.");
         }
     }
+    /**
+     * Allows the user to add a new recipe by collecting the necessary information and storing the new recipe.
+     */
+    private void addRecipePage(){
+        System.out.println("Adding Recipe");
+    }
+    private void addRecipeBookPage(){
+        System.out.println("Please enter the name of the new recipe book.");
+        System.out.print("\n> ");
+        input=reader.nextLine();
+        books.add(new RecipeBook(input));
+        System.out.println("Recipe book '"+input+"' added.");
+        state=States.RECIPEBOOKS;
+    }
+    /**
+     * Sets default recipes at the start of the program.
+     */
     private void setDefaultRecipes(){
         books.add(new RecipeBook("Mom's Recipes"));
 
@@ -308,9 +370,9 @@ public class InputManager {
         ingredients=new ArrayList<>();
         ingredients.add(new Ingredient("Flour", 2, Units.CUP));
         ingredients.add(new Ingredient("Egg yolk", 6, Units.INDIVIDUAL));
-        recipe2.addStep(new Step(ingredients, "Mix eggs yolks and flour to make pasta dough. Knead until no longer sticky.", 30, "Mixing Bowl"));
-        recipe2.addStep(new Step(new ArrayList<>(),"Chill dough for four hours.",240,"Refrigerator"));
-        recipe2.addStep(new Step(new ArrayList<>(),"Roll out dough and cut into thin strips to make noodles.",20,"Pasta Roller"));
+        subRecipe1.addStep(new Step(ingredients, "Mix eggs yolks and flour to make pasta dough. Knead until no longer sticky.", 30, "Mixing Bowl"));
+        subRecipe1.addStep(new Step(new ArrayList<>(),"Chill dough for four hours.",240,"Refrigerator"));
+        subRecipe1.addStep(new Step(new ArrayList<>(),"Roll out dough and cut into thin strips to make noodles.",20,"Pasta Roller"));
         subRecipe1.addStep(new Step(new ArrayList<>(),"Boil noodles in salted water until al dente.",10,"Stove"));
         subRecipe1.completeRecipe();
         recipe2.addRecipe(subRecipe1);
@@ -322,10 +384,13 @@ public class InputManager {
         ingredients=new ArrayList<>();
         ingredients.add(new Ingredient("Can of tomatoes",2,Units.INDIVIDUAL));
         subRecipe2.addStep(new Step(ingredients,"Add tomatoes, simmer and break down until it forms a sauce.",30,"Stove"));
-        recipe2.addRecipe(subRecipe2);
         subRecipe2.completeRecipe();
         recipe2.addRecipe(subRecipe2);
+        recipe2.completeRecipe();
 
+        books.get(0).addRecipe(recipe1);
+        books.get(0).addRecipe(recipe2);
+        
         books.add(new RecipeBook("The Soup Bible"));
 
     }
