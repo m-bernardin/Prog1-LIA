@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
+/**
+ * This class serves as the primary method with which the user interacts with RecipeBooks. 
+ * It contains methods to respond to the user's input based on an internally stored state, essentially 'where' the user is.
+ */
 public class InputManager {
     /**
      * The state of the input manager determines what page the user is on.
@@ -30,9 +33,14 @@ public class InputManager {
      * The recipe the user is currently viewing.
      */
     private Recipe openRecipe;
-
+    /**
+     * Indicates if the program is currently running.
+     */
+    private boolean running=true;
+    /**
+     * The default constructor for this class. Initializes certain non-primitive fields and adds several demonstrative RecipeBooks.
+     */
     public InputManager(){
-
         reader=new Scanner(System.in);
         state=States.RECIPEBOOKS;
         books=new ArrayList<>();
@@ -71,7 +79,6 @@ public class InputManager {
             case States.RECIPE:
                 recipePage();
         }
-
     }
     /**
      * Allows the user to choose a recipe book to open, or create a new one.
@@ -82,11 +89,16 @@ public class InputManager {
             System.out.println(i+".  "+books.get(i));
         }
         System.out.println(books.size()+".  "+"Create new recipe book");
+        System.out.println((books.size()+1)+".  Quit");
         System.out.print("\n> ");
         input=reader.nextLine();
         try{
             Integer intInput=Integer.parseInt(input);
-            if(intInput>books.size()&&intInput<0){
+            if(intInput==books.size()+1){
+                System.out.println("Quitting...\nGoodbye!");
+                running=false;
+            }
+            else if(intInput>books.size()&&intInput<0){
                 System.out.println("Please enter a number present in the options.");
             }
             else if(intInput==books.size()){
@@ -117,7 +129,6 @@ public class InputManager {
         
         try{
             Integer intInput=Integer.parseInt(input);
-
             if(intInput==0){
                 results=openBook.getRecipes();
                 state=States.SEARCHRESULTS;
@@ -137,7 +148,7 @@ public class InputManager {
         }
     }
     /**
-     * Allows the user to choose a caracteristic to seaarch by within a recipe book, collects a parameter for the search and stores the result.
+     * Allows the user to choose a caracteristic to search by within a recipe book, collects a parameter for the search and stores the result.
      */
     private void searchPage(){
         System.out.println("Please enter the number for what you would like to search by, or enter 'x' to go back to options.");
@@ -148,13 +159,10 @@ public class InputManager {
                 4. Maximum time
                 3. Top Rated
                 """);
-
         System.out.print("\n> ");
         input=reader.nextLine();
-        
         try{
             Integer intInput=Integer.parseInt(input);
-
             if(intInput==0){
                 System.out.println("Please enter the name of the recipe you are looking for.");
                 System.out.print("\n> ");
@@ -278,7 +286,6 @@ public class InputManager {
                 System.out.println("Please enter a number, or 'x' to go back to options.");
             }
         }
-
     }
     /**
      * Displays the results of the most recent search and allows the user to choose one to view in full.
@@ -309,7 +316,6 @@ public class InputManager {
                 System.out.println("Please enter a number, or 'x' to go back to search.");
             }
         }
-
     }
     /**
      * Displays the full recipe and allows the user to upvote or downvote the recipe.
@@ -351,7 +357,6 @@ public class InputManager {
      */
     private void setDefaultRecipes(){
         books.add(new RecipeBook("Mom's Recipes"));
-
         Recipe recipe1= new SimpleRecipe("Grilled Cheese Sandwich",1);
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Sliced Bread",2,Units.INDIVIDUAL));
@@ -364,7 +369,6 @@ public class InputManager {
         recipe1.addTag(Tags.LUNCH);
         recipe1.addTag(Tags.VEGETARIAN);
         recipe1.completeRecipe();
-        
         Recipe recipe2=new ComplexRecipe("Spaghetti from Scratch", 4);
         Recipe subRecipe1=new SimpleRecipe("Spaghetti Noodles",4);
         ingredients=new ArrayList<>();
@@ -387,11 +391,11 @@ public class InputManager {
         subRecipe2.completeRecipe();
         recipe2.addRecipe(subRecipe2);
         recipe2.completeRecipe();
-
         books.get(0).addRecipe(recipe1);
         books.get(0).addRecipe(recipe2);
-        
         books.add(new RecipeBook("The Soup Bible"));
-
+    }
+    public boolean getRunning(){
+        return running;
     }
 }

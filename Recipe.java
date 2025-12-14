@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashSet;
-
 /**
  * This is the generalized form for both SimpleRecipe and ComplexRecipe. This allows the RecipeBook to not need to distinguish between the two when interacting with any recipes it contains. 
  * This class contains all relevant getters and setters for both its child classes, as well generic forms for all of their unique methods.
@@ -11,7 +10,6 @@ import java.util.HashSet;
  * @see ComplexRecipe
  */
 public class Recipe {
-
     /**
      * The name of this recipe.
      */
@@ -51,7 +49,6 @@ public class Recipe {
      * @see RecipeBookManager
      */
     protected boolean recipeCompleteFlag=false;
-    
     /**
      * The default constructor for Recipe and its child classes.
      * 
@@ -66,7 +63,6 @@ public class Recipe {
         ingredients=new ArrayList<>();
         equipment=new HashSet<>(); 
     }
-
     /**
      * Increase the rating of this rating by one point.
      */
@@ -79,11 +75,9 @@ public class Recipe {
     public void downVote() {
         rating -= 1;
     }
-
     public int getRating() {
         return rating;
     }
-
     public void setRating(int rating){
         this.rating=rating;
     }
@@ -141,49 +135,38 @@ public class Recipe {
         }
         return "Tag sucessfully removed.";
     }
-
     public HashSet<Tags> getTags() {
         return tags;
     }
-
     public ArrayList<Ingredient> getIngredients(){
         return ingredients;
     }
-
     public HashSet<String> getEquipment(){
         return equipment;
     }
-
     public int getTime(){
         return time;
     }
-
     public void setTime(int time){
         this.time=time;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String getName() {
         return name;
     }
-
     public String getIntroduction()
     {
         return introduction;
     }
-
     public void setIntroduction(String introduction){
         this.introduction=introduction;
     }
-
     public int getServings()
     {
         return servings;
     }
-
     public void setServings(int servings){
         this.servings=servings;
     }
@@ -192,7 +175,6 @@ public class Recipe {
         String recipeString="";
         return recipeString;
     }
-
     public boolean getRecipeComplete(){
         return recipeCompleteFlag;
     }
@@ -204,12 +186,10 @@ public class Recipe {
     public void completeRecipe(){
         
     }
-
     public String toSimpleString()
     {
         return name+" for "+servings;
     }
-
     /**
      * Indicates wether another Recipe is essentialy the same as this one - that is to say they have the same Ingredients and identical instructions.
      * @param comparedRecipe - the recipe with which to compare
@@ -258,13 +238,11 @@ public class Recipe {
     public String getTimeAsString(){
         return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
     }
-
     public void confirmRecipe(){
         ingredients=calculateIngredients();
         time=calculateTime();
         equipment=calculateEquipment();
     }
-
     /**
      * Generic form of the method of the same in each of the child classes.
      * @see SimpleRecipe

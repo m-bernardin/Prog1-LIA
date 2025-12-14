@@ -1,9 +1,24 @@
 import java.util.ArrayList;
 import java.util.HashSet;
-
+/**
+ * A type of recipe which contains multiple smaller subrecipes, generally these are SimpleRecipes.
+ * This class specifies many generic methods inherited from Recipe.
+ * @version 1.0
+ * @author Mathieu Bernardin
+ * @see Recipe
+ * @see SimpleRecipe
+ */
 public class ComplexRecipe extends Recipe{
+    /**
+     * The subrecipes which this ComplexRecipe is made up of.
+     */
     ArrayList<Recipe> subRecipes;
-    
+    /**
+     * The default constructor for this class. Functionally identical to the superclass' constructor.
+     * @param name - the name of this recipe
+     * @param servings - how many servings this recipe makes
+     * @see Recipe
+     */
     public ComplexRecipe(String name,int servings){
         super(name, servings);
         subRecipes=new ArrayList<>();
@@ -66,7 +81,6 @@ public class ComplexRecipe extends Recipe{
      * @param factor - the factor by which this ComplexRecipe should be scaled
      * @return a scaled version of this ComplexRecipe
      */
- 
     public ComplexRecipe scale(int factor) {
         ComplexRecipe scaledRecipe=new ComplexRecipe(name, servings*factor);
         for(Recipe recipe:subRecipes){
@@ -74,11 +88,9 @@ public class ComplexRecipe extends Recipe{
         }
         return scaledRecipe;
     }
-    
     public ArrayList<Recipe> getRecipes() {
         return subRecipes;
     }
-
     /**
      * Checks if an ingredient is already present in an ArrayList
      * @param ingredient - the ingredient to be checked
@@ -93,7 +105,6 @@ public class ComplexRecipe extends Recipe{
         }
         return -1;
     }
-
     /**
      * Formats the recipe as a String for display
      * @return The formatted String
@@ -121,7 +132,6 @@ public class ComplexRecipe extends Recipe{
         }
         return subRecipesString;
     }
-
     /**
      * Formats the ingredients as a String for display as a subrecipe
      * @return The formatted String

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 /**
  * A representation of a single step within a SimpleRecipe. 
  * @version 1.0
@@ -45,35 +44,27 @@ public class Step {
         this.description=description;
         this.equipment=equipment;
     }
-
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
-
     public String getDescripton() {
         return description;
     }
-
     public int getTime() {
         return time;
     }
-    
     public void setDescription(String description){
         this.description=description;
     }
-
     public void setTime(int time){
         this.time=time;
     }
-
     public void addIngredient(Ingredient ingredient){
         ingredients.add(ingredient);
     }
-
     public String getEquipment() {
         return equipment;
     }
-
     public void setEquipment(String equipment) {
         this.equipment = equipment;
     }
