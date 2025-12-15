@@ -425,12 +425,68 @@ public class InputManager {
                         }
                     }
                     if(moveOn){
+                        newRecipe.completeRecipe();
                         openRecipe=newRecipe;
                         state=States.RECIPE;
                     }
                 }
                 else{
                     ComplexRecipe newRecipe=new ComplexRecipe(dishName, servings);
+                    boolean addingRecipes=true;
+                    while(addingRecipes){
+                        System.out.println("Add a subrecipe to your complex recipe.");
+                        System.out.println("Enter the name of this subrecipe.");
+                        System.out.print("\n> ");
+                        input=reader.nextLine();
+                        String name=input;
+                        SimpleRecipe subRecipe=new SimpleRecipe(name,servings);
+                        boolean addingSteps=true;
+                        System.out.println("Now add steps to your subrecipe.");
+                        while(addingSteps){
+                            subRecipe.addStep(buildStep());
+                            System.out.println("Enter '0' to add another step, or enter '1' to move on.");
+                            System.out.print("\n> ");
+                            input=reader.nextLine();
+                            moveOn=false;
+                            while(!moveOn){
+                                if(input.equals("0")){
+                                    moveOn=true;
+                                }
+                                else if(input.equals("1")){
+                                    moveOn=true;
+                                    addingSteps=false;
+                                }
+                                else{
+                                    System.out.println("Please enter a number present in the options.");
+                                    System.out.print("\n> ");
+                                    input=reader.nextLine();
+                                }
+                            }
+                        }
+                        subRecipe.completeRecipe();
+                        newRecipe.addRecipe(subRecipe);
+                        System.out.println("Enter '0' to add another subrecipe, or enter '1' to move on");
+                        System.out.print("\n> ");
+                        input=reader.nextLine();
+                        moveOn=false;
+                        while(!moveOn){
+                            if(input.equals("0")){
+                                moveOn=true;
+                            }
+                            else if(input.equals("1")){
+                                moveOn=true;
+                                addingRecipes=false;
+                            }
+                            else{
+                                System.out.println("Please enter a number present in the options.");
+                                System.out.print("\n> ");
+                                input=reader.nextLine();
+                            }
+                        }
+                    }
+                    newRecipe.completeRecipe();
+                    openRecipe=newRecipe;
+                    state=States.RECIPE;
                 }
             }
         }
