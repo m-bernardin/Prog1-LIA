@@ -29,19 +29,15 @@ public class Ingredient {
         this.quantity = quantity;
         this.unit = unit;
     }
-
     public double getQuantity() {
         return quantity;
     }
-
     public Units getUnit() {
         return unit;
     }
-
     public String getName() {
         return name;
     }
-
     public void setQuantity(double qty){
         quantity=qty;
     }

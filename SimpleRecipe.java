@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashSet;;
-
 /**
  * A type of recipe which contains only Steps.
  * This class specifies many generic methods inherited from Recipe.
@@ -94,7 +93,6 @@ public class SimpleRecipe extends Recipe {
         }
         return scaledRecipe;
     }
-
     public ArrayList<Step> getSteps() {
         return steps;
     }
@@ -140,7 +138,11 @@ public class SimpleRecipe extends Recipe {
         recipeString+="============";
         return recipeString;
     }
-
+    /**
+     * Formats this SimpleRecipe as a String which fits within the fromatting of a ComplexRecipe.
+     * @return The formatted String.
+     * @see ComplexRecipe
+     */
     public String formatAsSubRecipeString()
     {
         String recipeString="";
