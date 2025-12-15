@@ -106,11 +106,11 @@ public class InputManager {
      */
     private void openBookPage(){
         System.out.println("Book open: "+openBook);
-        System.out.println("Enter the number for what you would like to do.");
+        System.out.println("Enter the number for what you would like to do, or enter 'x' to go back.");
         System.out.println("""
                 0. Show all recipes
                 1. Search for a recipe
-                2. Go back to all recipe books
+                2. Add a new recipe
                 """);
         System.out.print("\n> ");
         input=reader.nextLine();
@@ -126,14 +126,19 @@ public class InputManager {
                 state=States.SEARCH;
             }
             else if(intInput==2){
-                state=States.RECIPEBOOKS;
+                state=States.ADDRECIPE;
             }
             else{
                 System.out.println("Please enter a number present in the options.");
             }
         }
         catch(NumberFormatException e){
-            System.out.println("Please enter a number.");
+            if (input.equals("x")){
+                state=States.RECIPEBOOKS;
+            }
+            else{
+                System.out.println("Please enter a number, or 'x' to go back.");
+            }
         }
     }
     /**
@@ -336,7 +341,93 @@ public class InputManager {
      * Allows the user to add a new recipe by collecting the necessary information and storing the new recipe.
      */
     private void addRecipePage(){
-        System.out.println("Adding Recipe");
+        int recipeType=-1;
+        String dishName="";
+        int servings=0;
+        boolean moveOn=false;
+        System.out.println("""
+            Please enter the number for the type of recipe you would like to add, or enter 'x' to go back.
+            0. Simple Recipe: A coherent recipe with one part. Ex: Muffins
+            1. Complex Recipe: A recipe with multiple isolated parts. Ex: Birthday cake with icing
+            """);
+        System.out.print("\n> ");
+        input=reader.nextLine();
+        try{
+            int intInput=Integer.parseInt(input);
+            if(intInput==0||intInput==1){
+                recipeType=intInput;
+                moveOn=true;
+            }
+            else{
+                System.out.println("Please enter a number present in the options.");
+            }
+        }catch(NumberFormatException e){
+            if(input.equals("x")){
+                state=States.WITHINBOOK;
+            }
+            else{
+                System.out.println("Please enter a number, or 'x' to go back.");
+            }
+        }
+        if(moveOn){
+            System.out.println("Please enter the name of this recipe.");
+            System.out.print("\n> ");
+            dishName=reader.nextLine();
+            moveOn=false;
+            System.out.println("Please enter how many servings this recipe will make.");
+            System.out.print("\n> ");
+            input=reader.nextLine();
+            while(!moveOn){
+                try{
+                    servings=Integer.parseInt(input);
+                    moveOn=true;
+                }
+                catch(NumberFormatException e){
+                    if(input.equals("x")){
+                        state=States.WITHINBOOK;
+                        break;
+                    }
+                    System.out.println("Please enter a number, or enter 'x' to go back");
+                    System.out.print("\n> ");
+                    input=reader.nextLine();
+                }
+            }
+            if (moveOn){
+                if(recipeType==0){
+                    SimpleRecipe newRecipe=new SimpleRecipe(dishName, servings);
+                    boolean addingSteps=true;
+                    System.out.println("Now add steps to your recipe.");
+                    while(addingSteps){
+                        newRecipe.addStep(buildStep());
+                        System.out.println("Enter '0' to add another step, or enter '1' to move on.");
+                        System.out.print("\n> ");
+                        input=reader.nextLine();
+                        moveOn=false;
+                        while(!moveOn){
+                            if(input.equals("0")){
+                                moveOn=true;
+                            }
+                            else if(input.equals("1")){
+                                moveOn=true;
+                                addingSteps=false;
+                            }
+                            else{
+                                System.out.println("Please enter a number present in the options.");
+                                System.out.print("\n> ");
+                                input=reader.nextLine();
+                            }
+                        }
+                    }
+                    if(moveOn){
+                        openRecipe=newRecipe;
+                        state=States.RECIPE;
+                    }
+                }
+                else{
+                    ComplexRecipe newRecipe=new ComplexRecipe(dishName, servings);
+                }
+            }
+        }
     }
     private void addRecipeBookPage(){
         System.out.println("Please enter the name of the new recipe book.");
@@ -345,6 +436,111 @@ public class InputManager {
         books.add(new RecipeBook(input));
         System.out.println("Recipe book '"+input+"' added.");
         state=States.RECIPEBOOKS;
+    }
+    private Step buildStep(){
+        boolean moveOn;
+        ArrayList<Ingredient> ingredients=new ArrayList<>();
+        Units unit=Units.CUP;
+        String ingredientName="";
+        double qty=0.0;
+        String equipment;
+        String description;
+        int time=0;
+        Units[] units=Units.values();
+        System.out.println("What ingredients does this step need?");
+        boolean addingIngredients=true;
+        while(addingIngredients){
+            System.out.println("Please enter the ingredient name.");
+            System.out.print("\n> ");
+            input=reader.nextLine();
+            ingredientName=input;
+            System.out.println("Please enter the number for he unit this ingredient will be mesured in.");
+            for(int i=0;i<units.length;i++){
+                System.out.println(i+". "+units[i]);
+            }
+            moveOn=false;
+            System.out.print("\n> ");
+            input=reader.nextLine();
+            while(!moveOn){
+                try{
+                    int intInput=Integer.parseInt(input);
+                    if(intInput>=0&&intInput<units.length){
+                        unit=units[intInput];
+                        moveOn=true;
+                        break;
+                    }
+                    else{
+                        System.out.println("Please enter a number that appears in the options.");
+                    }
+                }
+                catch(NumberFormatException e){
+                    System.out.println("Please enter a number.");
+                }
+                System.out.print("\n> ");
+                input=reader.nextLine();
+            }
+            System.out.println("Please enter the quantity of this ingredient. Only enter a number, the unit is already saved.");
+            System.out.print("\n> ");
+            input=reader.nextLine();
+            moveOn=false;
+            while(!moveOn){
+                try{
+                    double doubleInput=Double.parseDouble(input);
+                    qty=doubleInput;
+                    moveOn=true;
+                    break;
+                }
+                catch(NumberFormatException e){
+                    System.out.println("Please enter a number.");
+                }
+                System.out.print("\n> ");
+                input=reader.nextLine();
+            }
+            ingredients.add(new Ingredient(ingredientName,qty,unit));
+            System.out.println("Enter '0' to add another ingredient, or enter '1' to move on.");
+            System.out.print("\n> ");
+            input=reader.nextLine();
+            moveOn=false;
+            while(!moveOn){
+                if(input.equals("0")){
+                    moveOn=true;
+                }
+                else if(input.equals("1")){
+                    addingIngredients=false;
+                    moveOn=true;
+                }
+                else{
+                    System.out.println("Please enter a number that appears in the options.");
+                    System.out.print("\n> ");
+                    input=reader.nextLine();
+                }
+            }
+        }
+        System.out.println("What piece of equipment is needed for this step?");
+        System.out.print("\n> ");
+        input=reader.nextLine();
+        equipment=input;
+        System.out.println("What does this step entail? Please enter a description");
+        System.out.print("\n> ");
+        input=reader.nextLine();
+        description=input;
+        System.out.println("How long do you estimate this step will take, in minutes?");
+        System.out.print("\n> ");
+        input=reader.nextLine();
+        moveOn=false;
+        while(!moveOn){
+            try{
+                int intInput=Integer.parseInt(input);
+                time=intInput;
+                moveOn=true;
+            }
+            catch(NumberFormatException e){
+                System.out.println("Please enter a number.");
+                System.out.print("\n> ");
+                input=reader.nextLine();
+            }
+        }
+        return new Step(ingredients,description,time,equipment);
     }
     /**
      * Sets default recipes at the start of the program.
@@ -360,7 +556,7 @@ public class InputManager {
         ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Cheese slice",2,Units.INDIVIDUAL));
         recipe1.addStep(new Step(ingredients,"Make a sandwich with the cheese slices",1,""));
-        recipe1.addStep(new Step(new ArrayList<>(),"Fry sandwich on both sides",7,"Frying Pan"));
+        recipe1.addStep(new Step(new ArrayList<>(),"Fry sandwich on both =sides",7,"Frying Pan"));
         recipe1.addTag(Tags.LUNCH);
         recipe1.addTag(Tags.VEGETARIAN);
         recipe1.completeRecipe();
