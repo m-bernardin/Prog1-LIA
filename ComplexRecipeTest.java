@@ -62,6 +62,10 @@ public class ComplexRecipeTest{
     public void scaleTest()
     {
         setupSubrecipes();
-        assertEquals("placeholder stringt", recipe.scale(2));
+        ComplexRecipe scaledRecipe=recipe.scale(2);
+        assertEquals("Pasta for 8",scaledRecipe.toString());
+        for(Recipe subRecipe:scaledRecipe.getRecipes()){
+            assertEquals(subRecipe.getName()+" for 8", subRecipe.toString());
+        }
     }
 }

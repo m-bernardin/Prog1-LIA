@@ -144,4 +144,21 @@ public class ComplexRecipe extends Recipe{
         }
         return ingredientsString;
     }
+    /**
+     * Indicates wether another Recipe is essentially the same as this one. Two recipes are evaluated to be the same if they share a name, 
+     * @param recipe - the recipe to be compared to
+     * @return true if they are evaluated to be equal; false otherwise
+     */
+    public boolean equals(Recipe recipe){
+        if(name.equals(recipe.getName())&&servings==recipe.getServings()){
+            return true;
+        }
+        return false;
+    }
+    /**
+     * @return a representation of this recipe as a String.
+     */
+    public String toString(){
+        return name+" for "+servings;
+    }
 }
