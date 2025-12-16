@@ -1,4 +1,4 @@
-# A Super Good Name
+# Awesome Cookbooks
 ## As part of Programming 1 (420-101-VA) at Vanier College
 
 ### Description
