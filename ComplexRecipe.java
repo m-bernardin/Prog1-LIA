@@ -114,7 +114,7 @@ public class ComplexRecipe extends Recipe{
         recipeString+="======"+name+"======\n";
         recipeString+="  Serves: "+servings+"\n";
         recipeString+="  Rating: "+rating+"\n\n";
-        recipeString+=introduction+"\n\n============\n\n";
+        recipeString+="Equipment"+equipment+"\n\n============\n\n";
         recipeString+="Ingredients: \n"+getIngredientsAsString()+"\n";
         System.out.println(subRecipes.size());
         recipeString+="\n"+getSubRecipesAsString()+"\n";

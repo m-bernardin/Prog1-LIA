@@ -37,6 +37,8 @@ public class InputManager {
      * Indicates if the program is currently running.
      */
     private boolean running=true;
+
+    private States lastVisited;
     /**
      * The default constructor for this class. Initializes certain non-primitive fields and adds several demonstrative RecipeBooks.
      */
@@ -60,24 +62,31 @@ public class InputManager {
         switch(state){
             case States.RECIPEBOOKS:
                 recipeBooksPage();
+                lastVisited=States.RECIPEBOOKS;
                 break;
             case States.ADDRECIPE:
                 addRecipePage();
+                lastVisited=States.WITHINBOOK;
                 break;
             case States.ADDRECIPEBOOK:
                 addRecipeBookPage();
+                lastVisited=States.RECIPEBOOKS;
                 break;
             case States.WITHINBOOK:
                 openBookPage();
+                lastVisited=States.RECIPEBOOKS;
                 break;
             case States.SEARCH:
                 searchPage();
+                lastVisited=States.WITHINBOOK;
                 break;
             case States.SEARCHRESULTS:
                 searchResultsPage();
+                lastVisited=States.SEARCH;
                 break;
             case States.RECIPE:
                 recipePage();
+                lastVisited=States.SEARCHRESULTS;
         }
     }
     /**
@@ -145,7 +154,7 @@ public class InputManager {
         }
         catch(NumberFormatException e){
             if (input.equals("x")){
-                state=States.RECIPEBOOKS;
+                state=lastVisited;
             }
             else{
                 System.out.println("Please enter a number, or 'x' to go back.");
@@ -182,7 +191,7 @@ public class InputManager {
                         System.out.print("\n> ");
                         input=reader.nextLine();
                         if(input.equals("x")){
-                            state=States.SEARCH;
+                            state=lastVisited;
                             break;
                         }
                         else{
@@ -208,7 +217,7 @@ public class InputManager {
                         System.out.print("\n> ");
                         input=reader.nextLine();
                         if(input.equals("x")){
-                            state=States.SEARCH;
+                            state=lastVisited;
                             break;
                         }
                         else{
@@ -256,7 +265,7 @@ public class InputManager {
                     }
                     try{
                         Integer tagIndex=Integer.parseInt(input);
-                        if(tagIndex<=tags.length&&tagIndex>=0){
+                        if(tagIndex<tags.length&&tagIndex>=0){
                             results=openBook.searchTag(tags[tagIndex]);
                             if (results.size()>0){
                                 found=true;
@@ -271,6 +280,9 @@ public class InputManager {
                         }
                     }
                     catch(NumberFormatException e){
+                        if(input.equals("x")){
+                            state=lastVisited;
+                        }
                         System.out.println("Please enter a number, or enter 'x' to search by something else.");
                     }
                 }
@@ -285,7 +297,7 @@ public class InputManager {
         }
         catch(NumberFormatException e){
             if (input.equals("x")){
-                state=States.WITHINBOOK;
+                state=lastVisited;
             }
             else{
                 System.out.println("Please enter a number, or 'x' to go back to options.");
@@ -315,7 +327,7 @@ public class InputManager {
         }
         catch(NumberFormatException e){
             if(input.equals("x")){
-                state=States.SEARCH;
+                state=lastVisited;
             }
             else{
                 System.out.println("Please enter a number, or 'x' to go back to search.");
@@ -369,7 +381,7 @@ public class InputManager {
             }
         }catch(NumberFormatException e){
             if(input.equals("x")){
-                state=States.WITHINBOOK;
+                state=lastVisited;
             }
             else{
                 System.out.println("Please enter a number, or 'x' to go back.");
@@ -390,7 +402,7 @@ public class InputManager {
                 }
                 catch(NumberFormatException e){
                     if(input.equals("x")){
-                        state=States.WITHINBOOK;
+                        state=lastVisited;
                         break;
                     }
                     System.out.println("Please enter a number, or enter 'x' to go back");
@@ -486,11 +498,51 @@ public class InputManager {
                     }
                     newRecipe.completeRecipe();
                     openRecipe=newRecipe;
-                    state=States.RECIPE;
+                    
+                    
                 }
             }
         }
+        if(moveOn){
+            System.out.println("Please pick a tag to  add to this recipe.");
+            Tags[] tags = Tags.values();
+            boolean addingTags=true;
+            for(int i=0;i<tags.length;i++){
+                System.out.println(i+". "+tags[i].name());
+            }
+            System.out.println(tags.length+". "+"Don't add any more tags.");
+            System.out.print("\n> ");
+            input=reader.nextLine();
+            while(addingTags){
+                try{
+                    Integer tagIndex=Integer.parseInt(input);
+                    if(tagIndex<tags.length&&tagIndex>=0){
+                        openRecipe.addTag(tags[tagIndex]);
+                    }
+                    else if(tagIndex==tags.length){
+                        addingTags=false;
+                        break;
+                    }
+                    else{
+                        System.out.println("Please enter a number present in the options.");
+                    }
+                }
+                catch(NumberFormatException e){
+                    System.out.println("Please enter a number.");
+                }
+                for(int i=0;i<tags.length;i++){
+                System.out.println(i+". "+tags[i].name());
+                }
+                System.out.println(tags.length+". "+"Don't add any more tags.");
+                System.out.print("\n> ");
+                input=reader.nextLine();
+            }
+                state=States.RECIPE;
+        }
     }
+    /**
+     * Allows the user to create a new recipe by responding to prompts
+     */
     private void addRecipeBookPage(){
         System.out.println("Please enter the name of the new recipe book.");
         System.out.print("\n> ");
@@ -499,6 +551,10 @@ public class InputManager {
         System.out.println("Recipe book '"+input+"' added.");
         state=States.RECIPEBOOKS;
     }
+    /**
+     * Handles the step creation that appears in the addRecipePage method
+     * @return the step that it builds
+     */
     private Step buildStep(){
         boolean moveOn;
         ArrayList<Ingredient> ingredients=new ArrayList<>();
