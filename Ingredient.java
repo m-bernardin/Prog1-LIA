@@ -9,15 +9,15 @@ public class Ingredient {
     /**
      * The name of this ingredient
      */
-    String name;
+    private String name;
     /**
      * The quantity of this ingredient to be used
      */
-    double quantity; 
+    private double quantity; 
     /**
      * The unit this ingredient's quantity is measured in
      */
-    Units unit;
+    private Units unit;
     /**
      * The default constructorb for this class
      * @param name - this ingredient's name

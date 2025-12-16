@@ -12,7 +12,7 @@ public class ComplexRecipe extends Recipe{
     /**
      * The subrecipes which this ComplexRecipe is made up of.
      */
-    ArrayList<Recipe> subRecipes;
+    private ArrayList<Recipe> subRecipes;
     /**
      * The default constructor for this class. Functionally identical to the superclass' constructor.
      * @param name - the name of this recipe
