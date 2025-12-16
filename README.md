@@ -9,7 +9,7 @@ This project is able to model two types of recipes; Simple recipes and complex r
 
 Additionally, this project features recipe *Tags*, single-word descriptors for a recipe which allow the user to, at a glance, understand important details about a recipe, such as diet or intended meal. Tags may be added by editing the *Tags.java* file. New tags should be formatted in screaming snake case - that is to say fully capatalized, with spaces represented by underscores ( _ ). Please do not remove any tags already present, as this may lead to undesired failures. 
 
-This project also allows for searching through the recipes contained within a cookbook. This is done by navigating to the desired cookbook within the user interface, selecting a search parameter, and entering a search term. ***When entering a search term, please be sure to respect the following contraints:(Verify this with Maddy.)*** The currently implemented search parameters are as such: Title, Ingredients, Maximum Estimated Time, and Tags.
+This project also allows for searching through the recipes contained within a cookbook. This is done by navigating to the desired cookbook within the user interface, selecting a search parameter, and entering a search term. When entering a search term, please be sure to follow exact casings, as the search methods are case-sensitive. The currently implemented search parameters are as such: Title, Ingredients, Maximum Estimated Time, and Tags.
 
 ### To Run
 
