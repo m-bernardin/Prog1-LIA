@@ -74,7 +74,7 @@ public class Step {
      * @return a scaled version of this Step
      */
     public Step scale(int factor) {
-        Step scaledStep=new Step(description, equipment);
+        Step scaledStep=new Step(new ArrayList<>(),description, time,equipment);
         for(int i=0;i<ingredients.size();++i){
             scaledStep.addIngredient(ingredients.get(i).scale(factor));
         }

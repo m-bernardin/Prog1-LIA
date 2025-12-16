@@ -646,6 +646,25 @@ public class InputManager {
         books.get(0).addRecipe(recipe1);
         books.get(0).addRecipe(recipe2);
         books.add(new RecipeBook("The Soup Bible"));
+        ingredients=new ArrayList<>();
+        ingredients.add(new Ingredient("Egg", 2, Units.INDIVIDUAL));
+        Recipe recipe3=new SimpleRecipe("Pancakes",4);
+        recipe3.addStep(new Step(ingredients, "Beat eggs", 3, "whisk"));
+        Recipe recipe4=new Recipe("Waffles", 4);
+        Recipe recipe5=new Recipe("Pasta", 2);
+        Recipe recipe6=new SimpleRecipe("Omelette",2);
+        recipe6.addStep(new Step(ingredients, "Beat eggs", 3, "whisk"));
+        recipe3.addTag(Tags.BREAKFAST);
+        recipe4.addTag(Tags.BREAKFAST);
+        recipe6.addTag(Tags.BREAKFAST);
+        recipe3.completeRecipe();
+        recipe4.completeRecipe();
+        recipe5.completeRecipe();
+        recipe6.completeRecipe();
+        books.get(0).addRecipe(recipe3);
+        books.get(0).addRecipe(recipe4);
+        books.get(0).addRecipe(recipe5);
+        books.get(0).addRecipe(recipe6);
     }
     public boolean getRunning(){
         return running;

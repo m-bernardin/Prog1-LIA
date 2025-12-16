@@ -23,11 +23,16 @@ public class ComplexRecipeTest{
 
     public void setupSubrecipes() {
         subrecipe1=new SimpleRecipe("Dough", 4);
+        subrecipe1.addStep(new Step(new ArrayList<>(),"Chill dough",80,"Refrigerator"));
         subrecipe2=new SimpleRecipe("Sauce", 4);
-        subrecipe2=new SimpleRecipe("All Together", 4);
+        subrecipe3=new SimpleRecipe("All Together", 4);
+        subrecipe1.completeRecipe();
+        subrecipe2.completeRecipe();
+        subrecipe3.completeRecipe();
         recipe.addRecipe(subrecipe1);
         recipe.addRecipe(subrecipe2);
         recipe.addRecipe(subrecipe3);
+        recipe.completeRecipe();
     }
 
     @AfterEach

@@ -178,14 +178,6 @@ public class Recipe {
     public boolean getRecipeComplete(){
         return recipeCompleteFlag;
     }
-    /**
-     * Generic form of the method of the same in each of the child classes
-     * @see SimpleRecipe
-     * @see ComplexRecipe
-     */
-    public void completeRecipe(){
-        
-    }
     public String toSimpleString()
     {
         return name+" for "+servings;
@@ -238,10 +230,11 @@ public class Recipe {
     public String getTimeAsString(){
         return "this is the generic form of this method, it is overidden within SimpleRecipe and ComplexRecipe";
     }
-    public void confirmRecipe(){
+    public void completeRecipe(){
         ingredients=calculateIngredients();
         time=calculateTime();
         equipment=calculateEquipment();
+        recipeCompleteFlag=true;
     }
     /**
      * Generic form of the method of the same in each of the child classes.

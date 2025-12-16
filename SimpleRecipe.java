@@ -153,15 +153,13 @@ public class SimpleRecipe extends Recipe {
         recipeString+="------------";
         return recipeString;
     }
-    /**
-     * Sets this recipe to be complete by calling all calculate methods of this recipe. 
-     * For use by the RecipeBookManager
-     * @see RecipeBookManager
-     */
-    public void completeRecipe(){
-        calculateIngredients();
-        calculateTime();
-        calculateEquipment();
-        recipeCompleteFlag=true;
+    public boolean equals(Recipe recipe){
+        if(name.equals(recipe.getName())&&servings==recipe.getServings()){
+            return true;
+        }
+        return false;
+    }
+    public String toString(){
+        return name+" for "+servings;
     }
 }

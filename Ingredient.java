@@ -47,7 +47,7 @@ public class Ingredient {
      * @return true if they are evaluated to be equal; false otherwise
      */
     public boolean equals(Ingredient ingredient){
-        if(name.trim().toLowerCase().equals(ingredient.getName().trim().toLowerCase())&&unit.equals(ingredient.getUnit())&&quantity==ingredient.getQuantity()){
+        if(name.equals(ingredient.getName())&&unit.equals(ingredient.getUnit())&&quantity==ingredient.getQuantity()){
             return true;
         }
         return false;

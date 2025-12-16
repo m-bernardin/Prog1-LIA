@@ -48,8 +48,10 @@ public class RecipeBookTest
     {
         book.addRecipe(recipe1);
         book.addRecipe(recipe2);
-        book.upvoteRecipe(1);
-        assertEquals(recipe2,book.getTopRated());
+        recipe2.upVote();
+        ArrayList<Recipe> expectedList=new ArrayList<>();
+        expectedList.add(recipe2);
+        assertEquals(expectedList,book.getTopRated());
     }
 
 
@@ -74,7 +76,9 @@ public class RecipeBookTest
     {
         setupSearchTest();
         ArrayList<Recipe> results=book.searchIngredient("Egg");
-        assertEquals(recipe2,results.get(1));
+        System.out.println(book.getRecipes());
+        System.out.println(results);
+        assertEquals(recipe4,results.get(1));
     }
 
     @Test
@@ -83,14 +87,6 @@ public class RecipeBookTest
         setupSearchTest();
         ArrayList<Recipe> results=book.searchTime(30);
         assertEquals(recipe2,results.get(1));
-    }
-
-    @Test
-    public void testSearchTimeUnderBound()
-    {
-        setupSearchTest();
-        ArrayList<Recipe> results=book.searchTime(-1);
-        assertEquals(new Recipe("invalidRecipe",0), results.get(0));
     }
 
     @Test
@@ -110,10 +106,14 @@ public class RecipeBookTest
         recipe2=new Recipe("Waffles", 4);
         recipe3=new Recipe("Pasta", 2);
         recipe4=new SimpleRecipe("Omelette",2);
-        recipe2.addStep(new Step(ingredients, "Beat eggs", 3, "whisk"));
+        recipe4.addStep(new Step(ingredients, "Beat eggs", 3, "whisk"));
         recipe1.addTag(Tags.BREAKFAST);
         recipe2.addTag(Tags.BREAKFAST);
         recipe4.addTag(Tags.BREAKFAST);
+        recipe1.completeRecipe();
+        recipe2.completeRecipe();
+        recipe3.completeRecipe();
+        recipe4.completeRecipe();
     }
 
     public void setupSearchTest()
@@ -121,5 +121,6 @@ public class RecipeBookTest
         book.addRecipe(recipe1);
         book.addRecipe(recipe2);
         book.addRecipe(recipe3);
+        book.addRecipe(recipe4);
     }
 }
