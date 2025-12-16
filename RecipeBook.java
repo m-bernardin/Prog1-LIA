@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 /**
  * A representation of a single recipe book, containing many Recipes. Allows for searching through each stored Recipe based on name, ingredients, time, or tags. 
+ * @author Madeleine Siwick
  */
 public class RecipeBook {
     /**

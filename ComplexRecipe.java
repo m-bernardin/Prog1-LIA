@@ -4,7 +4,7 @@ import java.util.HashSet;
  * A type of recipe which contains multiple smaller subrecipes, generally these are SimpleRecipes.
  * This class specifies many generic methods inherited from Recipe.
  * @version 1.0
- * @author Mathieu Bernardin
+ * @author Madeleine Siwick
  * @see Recipe
  * @see SimpleRecipe
  */

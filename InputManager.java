@@ -3,6 +3,7 @@ import java.util.ArrayList;
 /**
  * This class serves as the primary method with which the user interacts with RecipeBooks. 
  * It contains methods to respond to the user's input based on an internally stored state, essentially 'where' the user is.
+ * @author Madeleine Siwick
  */
 public class InputManager {
     /**

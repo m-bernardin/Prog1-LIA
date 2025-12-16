@@ -2,7 +2,7 @@
  * A representation of a single ingredient within a Step.
  * Contains a measure of quantity with a specified unit.
  * @version 1.0
- * @author Mathieu Bernardin
+ * @author Madeleine Siwick
  * @see Step
  */
 public class Ingredient {
